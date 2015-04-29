@@ -2,21 +2,33 @@
 
 
 function dnh_tarieven_on_admin_menu() {
+	
    /* Beschrijving van de parameters van de function add_submenu_page:
     * 1: De slug van het menu waaraan dit submenu aan gekoppeld moet zijn. Null als page niet in een menu komt, maar op een 
     *    andere manier kan worden opgeroepen.
-    * 2: geen idee
+    * 2: titel van de pagina in de browser
     * 3: Titel van het menu
     * 4: Rechten om het menu zichtbaar te maken
     * 5: slug van deze page
     * 6: PHP functie die wordt aangeroepen als de gebruiker de page oproept.
     */
-	add_submenu_page( 'dnh_menu', 'Beheren Tarieven'  , 'Tarieven'   , 'manage_options', 'printfactuur'  , 'printfactuur'       );
+    
+	add_submenu_page( 'dnh_menu', 'Factuur printen test'  , 'Factuur'   , 'manage_options', 'factuur'  ,  'printFactuur'      );
+	
 }
+
+
 function printFactuur()
 {
-	ob_start(); 
-/*Door middel van dompdf is het mogelijk om een pdf te maken van een stuk html code.
+	
+		do_action("createInvoice");
+
+}
+
+function createInvoice()
+{
+	if(isset($_GET['page']) && $_GET['page']== 'factuur'){
+	/*Door middel van dompdf is het mogelijk om een pdf te maken van een stuk html code.
  Dit script moet uitgevoerd worden wanneer een knop ingedrukt wordt. Tot nu toe is het me
  niet gelukt om dit uit te laten voeren in een bestaande webpagina, maar na het uitvoeren
  stuurt het script de browser direct terug naar de vorige pagina.
@@ -30,7 +42,7 @@ if (isset($_GET['lidnr'])) {
 	$lidnr = $_GET['lidnr'];
 }
 else{
-	$lidnr = 6;
+	$lidnr = 0;
 }
 //sql statement die de meeste gegevens ophaalt.
 $sql = "SELECT L.Naam AS LNaam, L.Adres, L.Woonplaats, T.Contributiebedrag, T.Energietoeslag, T.Begindatum,
@@ -182,7 +194,6 @@ $dompdf -> render();
 /*En wordt doorgestuurd naar de pc van de gebruiker. Deze krijgt een "opslaan als"
  venster te zien, waar hij zelf kan beslissen waar de file opgeslagen moet worden.*/
 $dompdf -> stream("sample.pdf");
-ob_end_flush();
-
+	}
 }
 ?>

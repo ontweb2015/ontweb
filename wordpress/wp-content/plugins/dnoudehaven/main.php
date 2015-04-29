@@ -8,6 +8,7 @@ Version: 1.0
 require_once('factuur.php');
 
 add_action('admin_menu', 'dnh_on_admin_menu');
+add_action('init','createInvoice');
 
 function dnh_on_admin_menu() {
 	add_menu_page( 'DNHAdmin instellingen', // Wat in de tab van je browser komt te staan
