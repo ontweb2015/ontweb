@@ -134,7 +134,7 @@ class DNHlid_details_List_Table extends WP_List_Table {
 	}
 	
 	function column_factuur($item) {
-		return "<a href='	Hier kan je linkje 	" . $item->LidId . "'>Factuur</a>";
+		return "<a href='index.php?page=factuur&lidnr=" . $item->LidId . "'>Factuur</a>";
 	}
     
    /** ************************************************************************

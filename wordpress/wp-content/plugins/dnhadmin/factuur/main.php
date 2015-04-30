@@ -1,5 +1,6 @@
 <?php
 
+//TODO zorgen dat factuurregels en facturen automatisch in de database belanden.
 
 function dnh_factuur_on_admin_menu() {
 	
