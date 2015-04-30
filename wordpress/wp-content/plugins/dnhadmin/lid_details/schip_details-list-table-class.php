@@ -57,7 +57,7 @@ class DNHschip_details_List_Table extends WP_List_Table {
 	 *************************************************************************************/
 	function get_data() {
         global $wpdb; //This is used only if making any database queries
-        return $wpdb->get_results("SELECT * FROM schip WHERE Lid_LidId= ' ".$_GET['LidId']." ' ");
+        return $wpdb->get_results("SELECT * FROM schip WHERE Lid_LidId= '" . $_GET['LidId'] . "'");
 	}
 	
 	/********************* CONFIGUREREN VAN DE TABEL HEADER *******************************
@@ -82,14 +82,11 @@ class DNHschip_details_List_Table extends WP_List_Table {
     function get_columns(){
         $columns = array(
             'cb'        => '<input type="checkbox" />', //Render a checkbox instead of text
-            'LidId'     => 'ID',
+            'SchipId'     => 'SchipId',
             'Naam'    => 'Naam',
-            'Adres' => 'Adres',
-            'Woonplaats' => 'Woonplaats',
-            'Telefoonnummer' => 'Telefoonnummer',
-            'Emailadres' => 'Emailadres',
-            'Status' => 'Status',
-            'Factuur' =>    'Factuur'
+            'Lengte' => 'Lengte',
+            'Type' => 'Type',
+            'Lid_LidId' => 'Eigenaar',
         );
         return $columns;
     }
@@ -110,7 +107,7 @@ class DNHschip_details_List_Table extends WP_List_Table {
      **************************************************************************/
     function get_sortable_columns() {
         $sortable_columns = array(
-            'LidId'     => array('LidId',TRUE),     //true means it's already sorted
+            'SchipId'     => array('SchipId',TRUE),     //true means it's already sorted
         );
         return $sortable_columns;
     }
@@ -134,50 +131,25 @@ class DNHschip_details_List_Table extends WP_List_Table {
         );
     }
 	
-	function column_id($item) {
-        //Build row actions
-        $actions = array(
-            'edit'      => sprintf( '<a href="?page=%s&%s=%s">%s</a>'  ,'dnh_lid_details_edit'  ,$this->_args['singular'], $item->ID, __( 'Edit' ) ),
-            'delete'    => sprintf( '<a href="?page=%s&%s=%s">%s</a>','dnh_lid_details_delete',$this->_args['singular'], $item->ID, __( 'Delete' ) ),
-        );
-        
-        //Return the title contents
-        return sprintf('%1$s %2$s',
-            /*$1%s*/ $item->ID,
-            /*$2%s*/ $this->row_actions($actions)
-        );
-	}
-	
-	function column_lidid($item) {
-		return $item->LidId;
+	function column_schipid($item) {
+		return $item->SchipId;
 	}
 	
 	function column_naam($item) {
-		return "<a href='wp-content/plugins/dnhadmin/lid_schip/lid_schip.php?lidid=" . $item->LidId . "'>" . $item->Naam . "</a>";
+		return $item->Naam;
 	}
 	
-    function column_adres($item) {
-        return $item->Adres;
+    function column_lengte($item) {
+        return $item->Lengte;
     }
     
-	function column_woonplaats($item) {
-		return $item->Woonplaats;
+	function column_type($item) {
+		return $item->type;
 	}
 	
-	function column_telefoonnummer($item) {
-		return $item->Telefoonnummer;
-	}
-	
-	function column_emailadres($item) {
-		return $item->Emailadres;
-	}
-	
-	function column_status($item) {
-		if($item->Status == 1) {
-			return "Actief";
-		} else {
-			return "non-actief";
-		}
+	function column_Eigenaar($item) {
+		global $wpdb;
+		return $result = $wpdb->get_var("SELECT Naam FROM LID WHERE LidId= ' ". $item->Lid_LidId ." ' ");
 	}
     
    /** ************************************************************************

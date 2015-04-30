@@ -93,27 +93,6 @@ class DNHlid_details_List_Table extends WP_List_Table {
         return $columns;
     }
     
-    /** ************************************************************************
-     * Optional. If you want one or more columns to be sortable (ASC/DESC toggle), 
-     * you will need to register it here. This should return an array where the 
-     * key is the column that needs to be sortable, and the value is db column to 
-     * sort by. Often, the key and value will be the same, but this is not always
-     * the case (as the value is a column name from the database, not the list table).
-     * 
-     * This method merely defines which columns should be sortable and makes them
-     * clickable - it does not handle the actual sorting. You still need to detect
-     * the ORDERBY and ORDER querystring variables within prepare_items() and sort
-     * your data accordingly (usually by modifying your query).
-     * 
-     * @return array An associative array containing all the columns that should be sortable: 'slugs'=>array('data_values',bool)
-     **************************************************************************/
-    function get_sortable_columns() {
-        $sortable_columns = array(
-            'LidId'     => array('LidId',TRUE),     //true means it's already sorted
-        );
-        return $sortable_columns;
-    }
-    
     /********************* CELLEN RENDEREN ************************************************
      * 
      * De volgende methoden renderen de cellen van de verschillende kolommen. Voor elke 
@@ -127,7 +106,7 @@ class DNHlid_details_List_Table extends WP_List_Table {
 	}
 	
 	function column_naam($item) {
-		return "<a href='wp-content/plugins/dnhadmin/lid_schip/lid_schip.php?lidid=" . $item->LidId . "'>" . $item->Naam . "</a>";
+		return $item->Naam;
 	}
 	
     function column_adres($item) {

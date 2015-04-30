@@ -23,6 +23,7 @@ function dnh_lid_details_on_admin_menu() {
 	add_submenu_page( null		, 'Details'  , 'Details'  , 'manage_options', 'dnh_lid_details'       , 'dnh_lid_details_list'   );
 	add_submenu_page( null      , 'Nieuwe Leden'     , 'Nieuw'      , 'manage_options', 'dnh_lid_details_create', 'dnh_lid_details_create' );
 	add_submenu_page( null      , 'Lid Bewerken'   , 'Bewerken'   , 'manage_options', 'dnh_lid_details_edit'  , 'dnh_lid_details_edit'   );
+	add_submenu_page( null		, 'Details'  , 'Details'  , 'manage_options', 'dnh_lid_details' , 'dnh_schip_details_list'   );
 
 }
 
@@ -35,23 +36,34 @@ function dnh_lid_details_list() {
     wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
   }
   
-  if(!class_exists('DDNHlid_details_List_Table')){
+  if(!class_exists('DNHlid_details_List_Table')){
       require_once( 'lid_details-list-table-class.php' );
   }
-  if(!class_exists('DNHschip_details_List_Table')){
-	  require_once( 'lid_details-list-table-class.php' );
-  }
+  
   	//Create an instance of our package class...
 	$myListTable = new DNHlid_details_List_Table();
 	//Fetch, prepare, sort, and filter our data...
 	$myListTable->prepare_items();
 	include( 'lid_details-list.inc.php' );
 	
-	//Create an instance of our package class...
+		
+}
+
+function dnh_schip_details_list() {
+  // Beperk toegang
+  if ( !current_user_can( 'manage_options' ) )  {
+    wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+  }
+  
+  if(!class_exists('DNHschip_details_List_Table')){
+      require_once( 'schip_details-list-table-class.php' );
+  }
+  
+  	//Create an instance of our package class...
 	$myListTable = new DNHschip_details_List_Table();
 	//Fetch, prepare, sort, and filter our data...
 	$myListTable->prepare_items();
-	include( 'schip_details-list.inc.php' );		
+	include( 'schip_details-list.inc.php' );
 }
 
 /*
