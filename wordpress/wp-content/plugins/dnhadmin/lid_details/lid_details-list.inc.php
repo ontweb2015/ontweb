@@ -1,8 +1,8 @@
 <?php
 /*******************************************************************************************************
 Plugin: DNHAdmin
-Script: rubrieken-list.inc.php
-Doel  : "Template" voor de pagina waarin de lijst met rubrieken wordt getoond.
+Script: Lid details-list.inc.php
+Doel  : "Template" voor de pagina waarin de lijst met lid details wordt getoond.
 Auteur: Rajenco
 *******************************************************************************************************/
 

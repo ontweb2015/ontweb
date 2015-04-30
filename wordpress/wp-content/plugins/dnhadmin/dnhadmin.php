@@ -9,12 +9,12 @@ License: GPLv2 or later
 */
 
 /*** Toevoegen van alle scripts die onderdeel zijn van deze plugin ***/
-require_once( 'rubrieken/main.php' );
-require_once( 'tarieven/main.php'  );
-require_once( 'leden/main.php'	   );
-require_once( 'lid_details/main.php' );
-require_once( 'schepen/main.php'   );
-require_once('factuur/main.php');
+require_once( 'rubrieken/main.php' 	);
+require_once( 'tarieven/main.php'  	);
+require_once( 'leden/main.php'	   	);
+require_once( 'lid_details/main.php');
+require_once( 'schepen/main.php'   	);
+require_once( 'factuur/main.php'	);
 
 
 /*** Basisinstellingen van de plugin. Options zijn een soort constanten in Wordpress ***/

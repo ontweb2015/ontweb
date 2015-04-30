@@ -2,7 +2,7 @@
 /*******************************************************************************************************
 Plugin: DNHAdmin
 Script: leden-create.inc.php
-Doel  : "Template" voor het toevoegen van een nieuwe Rubriek
+Doel  : "Template" voor het toevoegen van een nieuw lid.
 Auteur: Rajenco
 *******************************************************************************************************/
 ?>

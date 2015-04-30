@@ -1,14 +1,11 @@
 <?php
 /*******************************************************************************************************
 Plugin: DNHAdmin
-Script: rubrieken/main.php
-Doel  : Hoofd bestand voor de rubrieken, combineert alle functionaliteit voor het tonen en bewerken van 
-        rubrieken
+Script: lid_details/main.php
+Doel  : Hoofd bestand voor de details van een lid, combineert het weergeven van zowel de details van het 
+		lid als de schepen die toebehoren aan dit lid.
 Auteur: Rajenco
 *******************************************************************************************************/
-
-// Include het script dat wijzigingen op de database verwerkt.
-require_once('process.php');
 
 /**
  * Aangeroepen tijdens de 'admin_menu' action
@@ -23,7 +20,7 @@ function dnh_lid_details_on_admin_menu() {
     * 5: slug van deze page
     * 6: PHP functie die wordt aangeroepen als de gebruiker de page oproept.
     */
-	add_submenu_page( 'dnh_menu', 'Details'  , 'Details'  , 'manage_options', 'dnh_lid_details'       , 'dnh_lid_details_list'   );
+	add_submenu_page( null		, 'Details'  , 'Details'  , 'manage_options', 'dnh_lid_details'       , 'dnh_lid_details_list'   );
 	add_submenu_page( null      , 'Nieuwe Leden'     , 'Nieuw'      , 'manage_options', 'dnh_lid_details_create', 'dnh_lid_details_create' );
 	add_submenu_page( null      , 'Lid Bewerken'   , 'Bewerken'   , 'manage_options', 'dnh_lid_details_edit'  , 'dnh_lid_details_edit'   );
 
@@ -38,14 +35,23 @@ function dnh_lid_details_list() {
     wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
   }
   
-  if(!class_exists('DNHlid_details_List_Table')){
+  if(!class_exists('DDNHlid_details_List_Table')){
       require_once( 'lid_details-list-table-class.php' );
   }
-  //Create an instance of our package class...
+  if(!class_exists('DNHschip_details_List_Table')){
+	  require_once( 'lid_details-list-table-class.php' );
+  }
+  	//Create an instance of our package class...
 	$myListTable = new DNHlid_details_List_Table();
 	//Fetch, prepare, sort, and filter our data...
 	$myListTable->prepare_items();
-	include( 'lid_details-list.inc.php' );	
+	include( 'lid_details-list.inc.php' );
+	
+	//Create an instance of our package class...
+	$myListTable = new DNHschip_details_List_Table();
+	//Fetch, prepare, sort, and filter our data...
+	$myListTable->prepare_items();
+	include( 'schip_details-list.inc.php' );		
 }
 
 /*
@@ -71,6 +77,5 @@ function dnh_lid_details_edit() {
    $item = $wpdb->get_row("SELECT * FROM DNH_LID WHERE ID = $id");
 
 	include( 'lid_details-edit.inc.php' );
-}
-*/
+}*/
 ?>
