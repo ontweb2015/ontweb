@@ -1,9 +1,9 @@
 <?php
 /*******************************************************************************************************
 Plugin: DNHAdmin
-Script: rubrieken-list-table-class.inc.php
-Doel  : Klasse die de lijst met rubrieken kan renderen
-Auteur: BugSlayer
+Script: leden-list-table-class.inc.php
+Doel  : Klasse die de lijst met leden kan renderen
+Auteur: Rajenco
 *******************************************************************************************************/
 
  /*************************** LOAD THE BASE CLASS *******************************
@@ -137,23 +137,9 @@ class DNHLeden_List_Table extends WP_List_Table {
         return sprintf(
             '<input type="checkbox" name="%1$s[]" value="%2$s" />',
             /*$1%s*/ $this->_args['singular'],  //Let's simply repurpose the table's singular label ("movie")
-            /*$2%s*/ $item->ID                //The value of the checkbox should be the record's id
+            /*$2%s*/ $item->LidId	            //The value of the checkbox should be the record's id
         );
     }
-	
-	function column_id($item) {
-        //Build row actions
-        $actions = array(
-            'edit'      => sprintf( '<a href="?page=%s&%s=%s">%s</a>'  ,'dnh_leden_edit'  ,$this->_args['singular'], $item->ID, __( 'Edit' ) ),
-            'delete'    => sprintf( '<a href="?page=%s&%s=%s">%s</a>','dnh_leden_delete',$this->_args['singular'], $item->ID, __( 'Delete' ) ),
-        );
-        
-        //Return the title contents
-        return sprintf('%1$s %2$s',
-            /*$1%s*/ $item->ID,
-            /*$2%s*/ $this->row_actions($actions)
-        );
-	}
 	
 	function column_lidid($item) {
 		return $item->LidId;
@@ -188,7 +174,7 @@ class DNHLeden_List_Table extends WP_List_Table {
 	}
     
 	function column_factuur($item) {
-		return "<a href='admin.php?page=lid_schip.php&lidid=" . $item->LidId . "'>Factuur</a>";
+		return "<a href='	Hier kan je linkje 	" . $item->LidId . "'>Factuur</a>";
 	}
 	
    /** ************************************************************************
@@ -196,44 +182,6 @@ class DNHLeden_List_Table extends WP_List_Table {
     **************************************************************************/
     function column_default($item, $column_name){
         return 'ERROR: '.print_r($item,true); //Show the whole array for troubleshooting purposes
-    }
-    
-	
-    /**************************************************************************
-     * Optional. If you need to include bulk actions in your list table, this is
-     * the place to define them. Bulk actions are an associative array in the format
-     * 'slug'=>'Visible Title'
-     * 
-     * If this method returns an empty value, no bulk action will be rendered. If
-     * you specify any bulk actions, the bulk actions box will be rendered with
-     * the table automatically on display().
-     * 
-     * Also note that list tables are not automatically wrapped in <form> elements,
-     * so you will need to create those manually in order for bulk actions to function.
-     * 
-     * @return array An associative array containing all the bulk actions: 'slugs'=>'Visible Titles'
-     **************************************************************************/
-    function get_bulk_actions() {
-        $actions = array(
-            'delete'    => __( 'Delete' )
-        );
-        return $actions;
-    }
-    
-    /** ************************************************************************
-     * Optional. You can handle your bulk actions anywhere or anyhow you prefer.
-     * For this example package, we will handle it in the class to keep things
-     * clean and organized.
-     * 
-     * @see $this->prepare_items()
-     **************************************************************************/
-    function process_bulk_action() {
-        
-        //Detect when a bulk action is being triggered...
-        if( 'delete'===$this->current_action() ) {
-            wp_die('Items deleted (or they would be if we had items to delete)!');
-        }
-        
     }
     
     /** ************************************************************************

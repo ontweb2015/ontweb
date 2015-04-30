@@ -1,9 +1,9 @@
 <?php
 /*******************************************************************************************************
 Plugin: DNHAdmin
-Script: rubrieken/main.php
-Doel  : Hoofd bestand voor de rubrieken, combineert alle functionaliteit voor het tonen en bewerken van 
-        rubrieken
+Script: leden/main.php
+Doel  : Hoofd bestand voor de leden, combineert alle functionaliteit voor het tonen en bewerken van 
+        leden
 Auteur: Rajenco
 *******************************************************************************************************/
 
@@ -17,7 +17,7 @@ function dnh_leden_on_admin_menu() {
    /* Beschrijving van de parameters van de function add_submenu_page:
     * 1: De slug van het menu waaraan dit submenu aan gekoppeld moet zijn. Null als page niet in een menu komt, maar op een 
     *    andere manier kan worden opgeroepen.
-    * 2: geen idee
+    * 2: Titel pagina
     * 3: Titel van het menu
     * 4: Rechten om het menu zichtbaar te maken
     * 5: slug van deze page
@@ -67,7 +67,7 @@ function dnh_leden_edit() {
    
    $id = sanitize_text_field( $_GET['lid'] );
    global $wpdb;
-   $item = $wpdb->get_row("SELECT * FROM DNH_LID WHERE ID = $id");
+   $item = $wpdb->get_row("SELECT * FROM DNH_LID WHERE LidId = $id");
 
 	include( 'leden-edit.inc.php' );
 }
