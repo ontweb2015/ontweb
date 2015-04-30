@@ -88,7 +88,8 @@ class DNHLeden_List_Table extends WP_List_Table {
             'Woonplaats' => 'Woonplaats',
             'Telefoonnummer' => 'Telefoonnummer',
             'Emailadres' => 'Emailadres',
-            'Status' => 'Status'
+            'Status' => 'Status',
+            'Factuur' => 'Factuur' 
         );
         return $columns;
     }
@@ -115,7 +116,8 @@ class DNHLeden_List_Table extends WP_List_Table {
 			'Woonplaats'     => array('Woonplaats',FALSE), 
 			'Telefoonnummer'     => array('Telefoonnummer',FALSE), 
 			'Emailadres'     => array('Emailadres',FALSE), 
-			'Status'     => array('Status',FALSE) 
+			'Status'     => array('Status',FALSE), 
+			'Factuur'	=> array('Factuur',FALSE)
         );
         return $sortable_columns;
     }
@@ -158,7 +160,7 @@ class DNHLeden_List_Table extends WP_List_Table {
 	}
 	
 	function column_naam($item) {
-		return "<a href='admin.php?page=lid_schip.php?lidid=" . $item->LidId . "'>" . $item->Naam . "</a>";
+		return "<a href='admin.php?page=lid_schip.php&lidid=" . $item->LidId . "'>" . $item->Naam . "</a>";
 	}
 	
     function column_adres($item) {
@@ -186,7 +188,7 @@ class DNHLeden_List_Table extends WP_List_Table {
 	}
     
 	function column_factuur($item) {
-		return "<a href='admin.php?page=lid_schip.php?lidid=" . $item->LidId . "'>Factuur</a>";
+		return "<a href='admin.php?page=lid_schip.php&lidid=" . $item->LidId . "'>Factuur</a>";
 	}
 	
    /** ************************************************************************

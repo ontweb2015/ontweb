@@ -57,7 +57,7 @@ class DNHlid_details_List_Table extends WP_List_Table {
 	 *************************************************************************************/
 	function get_data() {
         global $wpdb; //This is used only if making any database queries
-        return $wpdb->get_results("SELECT * FROM LID");
+        return $wpdb->get_results("SELECT * FROM LID WHERE LidId= ' ".$_GET['LidId']." ' ");
 	}
 	
 	/********************* CONFIGUREREN VAN DE TABEL HEADER *******************************
@@ -88,7 +88,8 @@ class DNHlid_details_List_Table extends WP_List_Table {
             'Woonplaats' => 'Woonplaats',
             'Telefoonnummer' => 'Telefoonnummer',
             'Emailadres' => 'Emailadres',
-            'Status' => 'Status'
+            'Status' => 'Status',
+            'Factuur' =>    'Factuur'
         );
         return $columns;
     }
@@ -110,12 +111,6 @@ class DNHlid_details_List_Table extends WP_List_Table {
     function get_sortable_columns() {
         $sortable_columns = array(
             'LidId'     => array('LidId',TRUE),     //true means it's already sorted
-            'Naam'    => array('Naam',FALSE),
-			'Adres'     => array('Adres',FALSE),
-			'Woonplaats'     => array('Woonplaats',FALSE), 
-			'Telefoonnummer'     => array('Telefoonnummer',FALSE), 
-			'Emailadres'     => array('Emailadres',FALSE), 
-			'Status'     => array('Status',FALSE) 
         );
         return $sortable_columns;
     }
@@ -213,23 +208,7 @@ class DNHlid_details_List_Table extends WP_List_Table {
         );
         return $actions;
     }
-    
-    /** ************************************************************************
-     * Optional. You can handle your bulk actions anywhere or anyhow you prefer.
-     * For this example package, we will handle it in the class to keep things
-     * clean and organized.
-     * 
-     * @see $this->prepare_items()
-     **************************************************************************/
-    function process_bulk_action() {
-        
-        //Detect when a bulk action is being triggered...
-        if( 'delete'===$this->current_action() ) {
-            wp_die('Items deleted (or they would be if we had items to delete)!');
-        }
-        
-    }
-    
+
     /** ************************************************************************
      * REQUIRED! This is where you prepare your data for display. This method will
      * usually be used to query the database, sort and filter the data, and generally

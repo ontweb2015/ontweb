@@ -25,6 +25,9 @@ Auteur: Rajenco
 		<table class="form-table">
 			<tbody>
 				<tr class="form-field form-required">
+					<input name="lidid" type="hidden" id="lidid" value="">
+				</tr>
+				<tr class="form-field form-required">
 					<th scope="row"><label for="naam">Naam <span class="description">(verplicht)</span></label></th>
 					<td><input name="naam" type="text" id="naam" value="" aria-required="true"></td>
 				</tr>
@@ -37,11 +40,11 @@ Auteur: Rajenco
 					<td><input name="woonplaats" type="text" id="woonplaats" value="" aria-required="true"></td>
 				</tr>
 				<tr class="form-field form-required">
-					<th scope="row"><label for="telefoonnummer">Telefoonnummer <span class="description">(verplicht)</span></label></th>
+					<th scope="row"><label for="telefoonnummer">Telefoonnummer <span class="description"></span></label></th>
 					<td><input name="telefoonnummer" type="text" id="telefoonnummer" value="" aria-required="true"></td>
 				</tr>
 				<tr class="form-field form-required">
-					<th scope="row"><label for="emailadres">Emailadres <span class="description">(verplicht)</span></label></th>
+					<th scope="row"><label for="emailadres">Emailadres <span class="description"></span></label></th>
 					<td><input name="emailadres" type="text" id="emailadres" value="" aria-required="true"></td>
 				</tr>
 				<tr class="form-field form-required">

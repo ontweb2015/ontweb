@@ -20,7 +20,7 @@ if ('delete'===$myListTable->current_action()) {
 ?>
 <div class="wrap">
     <div id="icon-users" class="icon32"><br/></div>
-	<h2>Leden
+	<h2>Schepen
 		<?php 
 		if ( current_user_can( 'manage_options' ) ) 
 			echo ' <a href="' . admin_url('admin.php?page=dnh_schepen_create') . '" class="add-new-h2">Nieuw schip</a>';

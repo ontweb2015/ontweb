@@ -2,8 +2,8 @@
 /*******************************************************************************************************
 Plugin: DNHAdmin
 Script: rubrieken/main.php
-Doel  : Hoofd bestand voor de rubrieken, combineert alle functionaliteit voor het tonen en bewerken van 
-        rubrieken
+Doel  : Hoofd bestand voor de schepen, combineert alle functionaliteit voor het tonen en bewerken van 
+        schepen
 Auteur: Rajenco
 *******************************************************************************************************/
 

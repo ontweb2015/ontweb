@@ -41,8 +41,8 @@ class DNHSchepen_List_Table extends WP_List_Table {
                 
         //Set parent defaults
         parent::__construct( array(
-            'singular'  => 'lid',     //singular name of the listed records
-            'plural'    => 'leden',    //plural name of the listed records
+            'singular'  => 'schip',     //singular name of the listed records
+            'plural'    => 'schepen',    //plural name of the listed records
             'ajax'      => false        //does this table support ajax?
         ) );
         
@@ -86,7 +86,7 @@ class DNHSchepen_List_Table extends WP_List_Table {
             'Naam'    => 'Naam',
             'Lengte' => 'Lengte',
             'Type' => 'Type',
-            'Lid_LidId' => 'Lid_LidID',
+            'Lid_LidId' => 'Eigenaar',
         );
         return $columns;
     }
@@ -166,7 +166,8 @@ class DNHSchepen_List_Table extends WP_List_Table {
 	}
 	
 	function column_lid_lidid($item) {
-		return $item->Lid_LidId;
+		global $wpdb;
+		return $result = $wpdb->get_var("SELECT Naam FROM LID WHERE LidId= ' ". $item->Lid_LidId ." ' ");
 	}
     
    /** ************************************************************************
