@@ -1,7 +1,7 @@
 <?php
 
 
-function dnh_tarieven_on_admin_menu() {
+function dnh_factuur_on_admin_menu() {
 	
    /* Beschrijving van de parameters van de function add_submenu_page:
     * 1: De slug van het menu waaraan dit submenu aan gekoppeld moet zijn. Null als page niet in een menu komt, maar op een 
@@ -13,7 +13,7 @@ function dnh_tarieven_on_admin_menu() {
     * 6: PHP functie die wordt aangeroepen als de gebruiker de page oproept.
     */
     
-	add_submenu_page( 'dnh_menu', 'Factuur printen test'  , 'Factuur'   , 'manage_options', 'factuur'  ,  'printFactuur'      );
+	add_submenu_page( null, 'Factuur'  , 'Factuur'   , 'manage_options', 'factuur'  ,  'printFactuur'      );
 	
 }
 

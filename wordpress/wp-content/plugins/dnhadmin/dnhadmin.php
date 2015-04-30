@@ -14,6 +14,7 @@ require_once( 'tarieven/main.php'  );
 require_once( 'leden/main.php'	   );
 require_once( 'lid_details/main.php' );
 require_once( 'schepen/main.php'   );
+require_once('factuur/main.php');
 
 
 /*** Basisinstellingen van de plugin. Options zijn een soort constanten in Wordpress ***/
@@ -22,6 +23,9 @@ add_option('current_year', 2015);
 
 /*** Configureren van het admin-menu voor deze plugin ***/
 add_action( 'admin_menu', 'dnh_on_admin_menu');
+
+/*** toevoegen mogelijkheid voor maken factuur***/
+add_action('init','createInvoice');
 
 function dnh_on_admin_menu() {
 	add_menu_page( 'DNHAdmin instellingen', // Wat in de tab van je browser komt te staan
@@ -38,6 +42,7 @@ function dnh_on_admin_menu() {
 	dnh_tarieven_on_admin_menu();  // Zelf bedacht. PHP functie van het sub-onderdeel dat menu-items aan het menu kan toevoegen.
 	dnh_leden_on_admin_menu();
 	dnh_schepen_on_admin_menu();
+	dnh_factuur_on_admin_menu();
 }
 
 /************** ADMIN NOTICES *****************************
