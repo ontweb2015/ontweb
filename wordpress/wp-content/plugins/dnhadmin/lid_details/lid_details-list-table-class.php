@@ -153,6 +153,10 @@ class DNHlid_details_List_Table extends WP_List_Table {
 			return "non-actief";
 		}
 	}
+	
+	function column_factuur($item) {
+		return "<a href='	Hier kan je linkje 	" . $item->LidId . "'>Factuur</a>";
+	}
     
    /** ************************************************************************
  	 * Functie die aangeroepen wordt als PHP niet de goede functie kan vinden

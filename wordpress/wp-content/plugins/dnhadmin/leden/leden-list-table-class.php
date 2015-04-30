@@ -146,7 +146,7 @@ class DNHLeden_List_Table extends WP_List_Table {
 	}
 	
 	function column_naam($item) {
-		return "<a href='admin.php?page=lid_schip.php&lidid=" . $item->LidId . "'>" . $item->Naam . "</a>";
+		return "<a href='admin.php?page=dnh_lid_details&LidId=" . $item->LidId . "'>" . $item->Naam . "</a>";
 	}
 	
     function column_adres($item) {

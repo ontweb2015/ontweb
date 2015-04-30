@@ -42,6 +42,7 @@ function dnh_on_admin_menu() {
 	dnh_tarieven_on_admin_menu();  // Zelf bedacht. PHP functie van het sub-onderdeel dat menu-items aan het menu kan toevoegen.
 	dnh_leden_on_admin_menu();
 	dnh_schepen_on_admin_menu();
+	dnh_lid_details_on_admin_menu();
 	dnh_factuur_on_admin_menu();
 }
 
