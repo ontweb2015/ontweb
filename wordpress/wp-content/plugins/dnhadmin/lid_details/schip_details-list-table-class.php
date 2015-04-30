@@ -144,12 +144,12 @@ class DNHschip_details_List_Table extends WP_List_Table {
     }
     
 	function column_type($item) {
-		return $item->type;
+		return $item->Type;
 	}
 	
-	function column_Eigenaar($item) {
+	function column_lid_lidid($item) {
 		global $wpdb;
-		return $result = $wpdb->get_var("SELECT Naam FROM LID WHERE LidId= ' ". $item->Lid_LidId ." ' ");
+		return $result = $wpdb->get_var("SELECT Naam FROM lid WHERE LidId= ' ". $item->Lid_LidId ." ' ");
 	}
     
    /** ************************************************************************

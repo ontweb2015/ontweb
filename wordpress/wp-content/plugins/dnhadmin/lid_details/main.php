@@ -23,7 +23,7 @@ function dnh_lid_details_on_admin_menu() {
 	add_submenu_page( null		, 'Details'  , 'Details'  , 'manage_options', 'dnh_lid_details'       , 'dnh_lid_details_list'   );
 	add_submenu_page( null      , 'Nieuwe Leden'     , 'Nieuw'      , 'manage_options', 'dnh_lid_details_create', 'dnh_lid_details_create' );
 	add_submenu_page( null      , 'Lid Bewerken'   , 'Bewerken'   , 'manage_options', 'dnh_lid_details_edit'  , 'dnh_lid_details_edit'   );
-	add_submenu_page( null		, 'Details'  , 'Details'  , 'manage_options', 'dnh_lid_details' , 'dnh_schip_details_list'   );
+	add_submenu_page( null		, 'DetailsSchip'  , 'DetailsSchip'  , 'manage_options', 'dnh_lid_details' , 'dnh_schip_details_list'   );
 
 }
 
