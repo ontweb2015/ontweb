@@ -45,7 +45,7 @@ function dnh_process_lid() {
     );
   } else {
     global $wpdb;
-    $updates = $wpdb->replace('DNH_LID', $data);
+    $updates = $wpdb->insert('DNH_LID', $data);
     // Redirect voorbereiden
     $qvars = array( 'page' => 'dnh_leden', 
       'dnh_ntc' => 'updated',
