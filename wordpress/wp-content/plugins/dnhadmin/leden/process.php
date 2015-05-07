@@ -30,11 +30,38 @@ function dnh_process_lid() {
   {
     $data['Naam'] = sanitize_text_field( $_POST['naam'] );
   } else {
-    $error_message .= 'Naam veld is niet meegestuurd';
+    $error_message .= 'Naam is niet ingevuld';
   }
-  if ( isset( $_POST['omschrijving'] ) )
+  
+  if ( isset( $_POST['adres'] ) )
   {
-    $data['Omschrijving'] = sanitize_text_field( $_POST['omschrijving'] );
+    $data['Adres'] = sanitize_text_field( $_POST['adres'] );
+  } else {
+    $error_message .= 'Adres is niet ingevuld';
+  }
+  
+  if ( isset( $_POST['woonplaats'] ) )
+  {
+    $data['Woonplaats'] = sanitize_text_field( $_POST['woonplaats'] );
+  } else {
+    $error_message .= 'Woonplaats is niet ingevuld';
+  }
+  
+  if ( isset( $_POST['telefoonnummer'] ) )
+  {
+    $data['Telefoonnummer'] = sanitize_text_field( $_POST['telefoonnummer'] );
+  }
+  
+  if ( isset( $_POST['emailadres'] ) )
+  {
+    $data['Emailadres'] = sanitize_text_field( $_POST['emailadres'] );
+  }
+  
+  if ( isset( $_POST['status'] ) )
+  {
+    $data['Status'] = sanitize_text_field( $_POST['status'] );
+  } else {
+    $error_message .= 'Status is niet ingevuld';
   }
 
   if(strlen($error_message) > 0) {

@@ -51,8 +51,8 @@ Auteur: Rajenco
 					<th scope="row"><label for="status">Status <span class="description">(verplicht)</span></label></th>
 					<td>
 						<select id="Status" name="Status">
-							<option value="actief">Actief</option>
-							<option value="non-actief">Non-actief</option>
+							<option value="1">Actief</option>
+							<option value="0">Non-actief</option>
 						</select>
 					</td>
 				</tr>

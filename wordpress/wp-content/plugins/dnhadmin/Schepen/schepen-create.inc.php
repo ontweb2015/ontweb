@@ -37,12 +37,22 @@ Auteur: Rajenco
 					<td><input name="woonplaats" type="text" id="woonplaats" value="" aria-required="true"></td>
 				</tr>
 				<tr class="form-field form-required">
-					<th scope="row"><label for="status">Status <span class="description">(verplicht)</span></label></th>
+					<th scope="row"><label for="Lid_LidId">Eigenaar </label></th>
 					<td>
-						<select id="Status" name="Status">
-							<option value="actief">Actief</option>
-							<option value="non-actief">Non-actief</option>
-						</select>
+						<?php if($lid != 0){
+                            echo '<select name="lidid" id="lidid" style="width: 300px">';
+                            foreach($lid as $value){
+                                $id = $value->LidId;
+                                $naam = $value->Naam;
+                                if($id == $item->Lid_LidId){
+                                    echo '<option value="' . $id . '" selected>' . $naam . '</option>';
+                                }
+                                else {
+                                    echo '<option value="'.$id.'">' . $naam . '</option>';
+                                }
+                            }
+                            echo '</select>';
+                        } ?>
 					</td>
 				</tr>
 			</tbody>
