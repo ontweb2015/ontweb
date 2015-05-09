@@ -29,19 +29,27 @@ Auteur: Rajenco
 					<td><input name="naam" type="text" id="naam" value="" aria-required="true"></td>
 				</tr>
 				<tr class="form-field form-required">
-					<th scope="row"><label for="adres">Lengte <span class="description">(verplicht)</span></label></th>
-					<td><input name="adres" type="text" id="adres" value="" aria-required="true"></td>
+					<th scope="row"><label for="lengte">Lengte <span class="description">(verplicht)</span></label></th>
+					<td><input name="lengte" type="text" id="lengte" value="" aria-required="true"></td>
 				</tr>
 				<tr class="form-field form-required">
-					<th scope="row"><label for="woonplaats">Type <span class="description">(verplicht)</span></label></th>
-					<td><input name="woonplaats" type="text" id="woonplaats" value="" aria-required="true"></td>
-				</tr>
-				<tr class="form-field form-required">
-					<th scope="row"><label for="Lid_LidId">Eigenaar </label></th>
+					<th scope="row"><label for="type">Type <span class="description">(verplicht)</span></label></th>
 					<td>
-						<?php if($lid != 0){
-                            echo '<select name="lidid" id="lidid" style="width: 300px">';
-                            foreach($lid as $value){
+						<select id="type" name="type">
+							<option value="Motorboot">Motorboot</option>
+							<option value="Zeilboot">Zeilboot</option>
+						</select>
+					</td>
+				</tr>
+				<tr class="form-field form-required">
+					<th scope="row"><label for="lid_lidid">Eigenaar </label></th>
+					<td>
+						<?php
+						global $wpdb; //This is used only if making any database queries
+        				$leden =  $wpdb->get_results("SELECT LidId, Naam FROM LID");
+						if($leden != 0){
+                            echo '<select name="lid_lidid" id="lid_lidid" style="width: 300px">';
+                            foreach($leden as $value){
                                 $id = $value->LidId;
                                 $naam = $value->Naam;
                                 if($id == $item->Lid_LidId){
@@ -52,7 +60,8 @@ Auteur: Rajenco
                                 }
                             }
                             echo '</select>';
-                        } ?>
+                        }
+                         ?>
 					</td>
 				</tr>
 			</tbody>

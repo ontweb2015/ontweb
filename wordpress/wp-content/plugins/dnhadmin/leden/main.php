@@ -26,7 +26,6 @@ function dnh_leden_on_admin_menu() {
 	add_submenu_page( 'dnh_menu', 'Beheren Leden'  , 'Leden'  , 'manage_options', 'dnh_leden'       , 'dnh_leden_list'   );
 	add_submenu_page( null      , 'Nieuwe Leden'     , 'Nieuw'      , 'manage_options', 'dnh_leden_create', 'dnh_leden_create' );
 	add_submenu_page( null      , 'Lid Bewerken'   , 'Bewerken'   , 'manage_options', 'dnh_leden_edit'  , 'dnh_leden_edit'   );
-
 }
 
 /**

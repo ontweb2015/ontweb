@@ -25,9 +25,6 @@ Auteur: Rajenco
 		<table class="form-table">
 			<tbody>
 				<tr class="form-field form-required">
-					<input name="lidid" type="hidden" id="lidid" value="">
-				</tr>
-				<tr class="form-field form-required">
 					<th scope="row"><label for="naam">Naam <span class="description">(verplicht)</span></label></th>
 					<td><input name="naam" type="text" id="naam" value="" aria-required="true"></td>
 				</tr>
@@ -50,7 +47,7 @@ Auteur: Rajenco
 				<tr class="form-field form-required">
 					<th scope="row"><label for="status">Status <span class="description">(verplicht)</span></label></th>
 					<td>
-						<select id="Status" name="Status">
+						<select id="status" name="status">
 							<option value="1">Actief</option>
 							<option value="0">Non-actief</option>
 						</select>
@@ -58,7 +55,6 @@ Auteur: Rajenco
 				</tr>
 			</tbody>
 		</table>
-
 		<input type="submit" value="Toevoegen" class="button button-primary"/>
 	</form>
 </div>

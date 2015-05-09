@@ -1,8 +1,8 @@
 <?php
 /*******************************************************************************************************
 Plugin: DNHAdmin
-Script: rubrieken/process.php
-Doel  : Alles voor het verwerken van wijzigingen van Rubrieken
+Script: schepen/process.php
+Doel  : Alles voor het verwerken van wijzigingen van schepen
 Auteur: Rajenco
 *******************************************************************************************************/
 
@@ -26,24 +26,28 @@ function dnh_process_schip() {
   // Ophalen en valideren van de data
   $error_message = "";
   $data = array();
-  if ( isset( $_POST['id'] ) )
-  {
-    $data['ID'] = sanitize_text_field( $_POST['id'] );
-    if (!is_numeric($data['ID'])) {
-      $error_message .= 'Id veld is niet mumeriek';
-    }
-  } else {
-    $error_message .= 'Id veld is niet meegestuurd';
-  }
   if ( isset( $_POST['naam'] ) )
   {
-    $data['Naam'] = sanitize_text_field( $_POST['naam'] );
+  	$data['Naam'] = sanitize_text_field( $_POST['naam'] );
   } else {
     $error_message .= 'Naam veld is niet meegestuurd';
   }
-  if ( isset( $_POST['omschrijving'] ) )
+  
+  if ( isset( $_POST['lengte'] ) )
   {
-    $data['Omschrijving'] = sanitize_text_field( $_POST['omschrijving'] );
+  	$data['Lengte'] = sanitize_text_field( $_POST['lengte'] );
+  } else {
+    $error_message .= 'Lengte veld is niet meegestuurd';
+  }
+  
+  if ( isset( $_POST['type'] ) )
+  {
+  	$data['type'] = $_POST['type'];
+  }
+  
+  if ( isset( $_POST['lid_lidid'] ) )
+  {
+  	$data['lid_lidid'] = $_POST['lid_lidid'];
   }
 
   if(strlen($error_message) > 0) {
@@ -53,12 +57,12 @@ function dnh_process_schip() {
       'dnh_ntm' => urlencode( $error_message )
     );
   } else {
-    global $wpdb; //This is used only if making any database queries
-    $updates = $wpdb->replace('DNH_LID', $data);
+    global $wpdb;
+    $updates = $wpdb->insert('SCHIP', $data);
     // Redirect voorbereiden
-    $qvars = array( 'page' => 'dnh_leden', 
+    $qvars = array( 'page' => 'dnh_schepen', 
       'dnh_ntc' => 'updated',
-      'dnh_ntm' => urlencode( 'Lid is succesvol aangemaakt/bijgewerkt' ) );
+      'dnh_ntm' => urlencode( 'Schip is succesvol aangemaakt' ) );
   }
   wp_redirect( add_query_arg( $qvars, admin_url( 'admin.php' ) ) );
   exit;

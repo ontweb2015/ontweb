@@ -56,12 +56,10 @@ function dnh_process_lid() {
   {
     $data['Emailadres'] = sanitize_text_field( $_POST['emailadres'] );
   }
-  
+
   if ( isset( $_POST['status'] ) )
   {
-    $data['Status'] = sanitize_text_field( $_POST['status'] );
-  } else {
-    $error_message .= 'Status is niet ingevuld';
+  	$data['status'] = $_POST['status'];
   }
 
   if(strlen($error_message) > 0) {
@@ -72,11 +70,11 @@ function dnh_process_lid() {
     );
   } else {
     global $wpdb;
-    $updates = $wpdb->insert('DNH_LID', $data);
+    $updates = $wpdb->insert('LID', $data);
     // Redirect voorbereiden
     $qvars = array( 'page' => 'dnh_leden', 
       'dnh_ntc' => 'updated',
-      'dnh_ntm' => urlencode( 'Lid is succesvol aangemaakt/bijgewerkt' ) );
+      'dnh_ntm' => urlencode( 'Lid is succesvol aangemaakt' ) );
   }
   wp_redirect( add_query_arg( $qvars, admin_url( 'admin.php' ) ) );
   exit;
