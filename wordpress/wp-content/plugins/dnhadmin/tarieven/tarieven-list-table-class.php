@@ -57,7 +57,7 @@ class DNHTarieven_List_Table extends WP_List_Table {
 	 *************************************************************************************/
 	function get_data() {
         global $wpdb; //This is used only if making any database queries
-        return $wpdb->get_results("SELECT * FROM DNH_TARIEF ORDER BY Jaar");
+        return $wpdb->get_results("SELECT * FROM TARIEF ORDER BY Jaar");
 	}
 	
 	/********************* CONFIGUREREN VAN DE TABEL HEADER *******************************

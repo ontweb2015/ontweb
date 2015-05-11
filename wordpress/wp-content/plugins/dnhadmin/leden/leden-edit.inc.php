@@ -23,7 +23,7 @@ Auteur: Rajenco
 		<table class="form-table">
 			<tbody>
 				<tr class="form-field form-required">
-					<th scope="row"><label for="id">Lid ID: <span class="description">(verplicht)</span></label></th>
+					<th scope="row"><label for="lidid">Lid ID: <span class="description">(verplicht)</span></label></th>
 					<td><input name="id" type="text" id="id" value="<?php echo $item->LidID ?>" aria-required="true"></td>
 				</tr>
 				<tr class="form-field form-required">

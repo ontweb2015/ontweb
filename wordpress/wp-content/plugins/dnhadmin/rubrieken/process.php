@@ -28,8 +28,8 @@ function dnh_process_rubriek() {
   $data = array();
   if ( isset( $_POST['id'] ) )
   {
-    $data['ID'] = sanitize_text_field( $_POST['id'] );
-    if (!is_numeric($data['ID'])) {
+    $data['RubriekId'] = sanitize_text_field( $_POST['id'] );
+    if (!is_numeric($data['RubriekId'])) {
       $error_message .= 'Id veld is niet mumeriek';
     }
   } else {
@@ -54,7 +54,7 @@ function dnh_process_rubriek() {
     );
   } else {
     global $wpdb; //This is used only if making any database queries
-    $updates = $wpdb->replace('DNH_RUBRIEK', $data);
+    $updates = $wpdb->replace('RUBRIEK', $data);
     // Redirect voorbereiden
     $qvars = array( 'page' => 'dnh_rubrieken', 
       'dnh_ntc' => 'updated',
@@ -135,7 +135,7 @@ function dnh_process_delete_rubrieken() {
 
     // verwijderen rubrieken
     foreach ($rubrieken as $rubriek) {
-      $wpdb->delete( 'DNH_RUBRIEK', Array( 'ID' => $rubriek ) );
+      $wpdb->delete( 'RUBRIEK', Array( 'ID' => $rubriek ) );
     }
     // Redirect voorbereiden
     $qvars = array( 'page' => 'dnh_rubrieken', 

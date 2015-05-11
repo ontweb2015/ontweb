@@ -81,7 +81,7 @@ class DNHLeden_List_Table extends WP_List_Table {
      **************************************************************************/
     function get_columns(){
         $columns = array(
-            'cb'        => '<input type="checkbox" />', //Render a checkbox instead of text
+            'radio' => '',
             'LidId'     => 'ID',
             'Naam'    => 'Naam',
             'Adres' => 'Adres',
@@ -133,9 +133,9 @@ class DNHLeden_List_Table extends WP_List_Table {
 	/*
 	 * De checkbox links van de rij, waarmee je items kan selecteren
 	 */
-    function column_cb($item){
+    function column_radio($item){
         return sprintf(
-            '<input type="checkbox" name="%1$s[]" value="%2$s" />',
+            '<input type="radio" name="%1$s[]" value="%2$s" />',
             /*$1%s*/ $this->_args['singular'],  //Let's simply repurpose the table's singular label ("movie")
             /*$2%s*/ $item->LidId	            //The value of the checkbox should be the record's id
         );
@@ -183,7 +183,8 @@ class DNHLeden_List_Table extends WP_List_Table {
     function column_default($item, $column_name){
         return 'ERROR: '.print_r($item,true); //Show the whole array for troubleshooting purposes
     }
-    
+
+	
     /** ************************************************************************
      * REQUIRED! This is where you prepare your data for display. This method will
      * usually be used to query the database, sort and filter the data, and generally

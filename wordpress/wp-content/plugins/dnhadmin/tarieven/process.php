@@ -83,7 +83,7 @@ function dnh_process_tarief() {
     $qvars['dnh_ntm'] = urlencode( join( ', ', $error_message ) );
   } else {
     global $wpdb; //This is used only if making any database queries
-    $updates = $wpdb->replace('DNH_TARIEF', $data);
+    $updates = $wpdb->replace('TARIEF', $data);
     if ($updates === FALSE) {
       $qvars['dnh_ntc'] = 'error';
       $qvars['dnh_ntm'] = urlencode( __( 'Could not execute query: ' ) . $wpdb->last_error );
@@ -150,7 +150,7 @@ function dnh_process_delete_tarieven() {
         // verwijderen tarieven
     $updates = 0;
     foreach ($jaren as $jaar) {
-      $update = $wpdb->delete( 'DNH_TARIEF', Array( 'Jaar' => $jaar ) );
+      $update = $wpdb->delete( 'TARIEF', Array( 'Jaar' => $jaar ) );
       if ($update === FALSE) {
         $qvars['dnh_ntc'] = 'error';
         $qvars['dnh_ntm'] = urlencode( __( 'Could not execute query: ' ) . $wpdb->last_error );
