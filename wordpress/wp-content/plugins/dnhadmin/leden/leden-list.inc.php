@@ -14,31 +14,29 @@ if ( !current_user_can( 'manage_options' ) )  {
 ?>
 <div class="wrap">
     <div id="icon-users" class="icon32"><br/></div>
-	<h2>Leden
-		<?php 
-		if ( current_user_can( 'manage_options' ) ) 
-			echo ' <a href="' . admin_url('admin.php?page=dnh_leden_create') . '" class="add-new-h2">Nieuw lid</a>';
-		if ( ! empty( $_REQUEST['s'] ) )
-			printf( ' <span class="subtitle">' . __('Search results for &#8220;%s&#8221;') . '</span>', get_search_query() );
-		?>
-	</h2>
+	<h2>Leden</h2>
 
     <!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions -->
-    <form id="<?php echo $items ?>-filter" method="get">
+    <form id="<?php echo $items ?>-filter" method="get" action="admin.php?page=dnh_leden_edit&LidId=<?php $_GET['lid']?>">
         <!-- For plugins, we also need to ensure that the form posts back to our current page -->
         <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
         <!-- Now we can render the completed list table -->
         <?php 
         	$myListTable->display() ?>
+        	<input type="submit" value="test">
     </form>
     
 
 	<h2><?php 
-		if ( current_user_can( 'manage_options' ) ) 
-			echo '<a href="' . admin_url('admin.php?page=dnh_leden_edit&LidId=' . $item->LidId . '') . '" class="add-new-h2">Wijzig lid</a>';
+		if ( current_user_can( 'manage_options' ) )
+			echo ' <a href="' . admin_url('admin.php?page=dnh_leden_create') . '" class="add-new-h2">Nieuw lid</a>'; 
+			echo '<a href="' . admin_url('admin.php?page=dnh_leden_edit&LidId=' . $_POST["lid"]) . '" class="add-new-h2">Wijzig lid</a>';
+			
 		if ( ! empty( $_REQUEST['s'] ) )
 			printf( ' <span class="subtitle">' . __('Search results for &#8220;%s&#8221;') . '</span>', get_search_query() );
 		?>
 	</h2>
-    
+	    <?php if(checked == true) {
+	    	echo $_POST["lid"]; 
+	    }?>
 </div>

@@ -134,11 +134,7 @@ class DNHLeden_List_Table extends WP_List_Table {
 	 * De checkbox links van de rij, waarmee je items kan selecteren
 	 */
     function column_radio($item){
-        return sprintf(
-            '<input type="radio" name="%1$s[]" value="%2$s" />',
-            /*$1%s*/ $this->_args['singular'],  //Let's simply repurpose the table's singular label ("movie")
-            /*$2%s*/ $item->LidId	            //The value of the checkbox should be the record's id
-        );
+    	return "<input type='radio' name='lid' value='" . $item->LidId . "'>";
     }
 	
 	function column_lidid($item) {
