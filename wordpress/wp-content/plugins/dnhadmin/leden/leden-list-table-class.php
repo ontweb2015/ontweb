@@ -81,7 +81,6 @@ class DNHLeden_List_Table extends WP_List_Table {
      **************************************************************************/
     function get_columns(){
         $columns = array(
-            'radio' => '',
             'LidId'     => 'ID',
             'Naam'    => 'Naam',
             'Adres' => 'Adres',
@@ -129,14 +128,7 @@ class DNHLeden_List_Table extends WP_List_Table {
      * De slugs definieer je in de functie get_columns() hierboven.
      * 
      *************************************************************************************/
-	
-	/*
-	 * De checkbox links van de rij, waarmee je items kan selecteren
-	 */
-    function column_radio($item){
-    	return "<input type='radio' name='radiolid' value='" . $item->LidId . "'>";
-    }
-	
+
 	function column_lidid($item) {
 		return $item->LidId;
 	}

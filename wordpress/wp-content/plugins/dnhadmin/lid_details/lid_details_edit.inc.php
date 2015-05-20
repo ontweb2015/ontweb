@@ -1,15 +1,15 @@
 <?php
 /*******************************************************************************************************
 Plugin: DNHAdmin
-Script: leden-edit.inc.php
-Doel  : "Template" voor het bewerken van een bestaand lid.
-Auteur: Rajenco
+Script: lid_details_edit.inc.php
+Doel  : "Template" voor het bewerken van een bestaande Rubiek
+Auteur: BugSlayer
 *******************************************************************************************************/
+
 function get_data() {
         global $wpdb; //This is used only if making any database queries
         return $wpdb->get_results("SELECT * FROM LID WHERE LidId= ' ".$_GET['LidId']." ' ");
-	}
-
+}
 ?>
 <div class="wrap">
 	<h2>Bewerk lid</h2>
@@ -27,10 +27,6 @@ function get_data() {
 		<!-- En nu... de inhoud van het form -->
 		<table class="form-table">
 			<tbody>
-				<tr class="form-field form-required">
-					<th scope="row"><label for="lidid">Lid ID: <span class="description">(verplicht)</span></label></th>
-					<td><input name="id" type="text" id="id" value="<?php echo $item->LidID ?>" aria-required="true"></td>
-				</tr>
 				<tr class="form-field form-required">
 					<th scope="row"><label for="naam">Naam: <span class="description">(verplicht)</span></label></th>
 					<td><input name="naam" type="text" id="naam" value="<?php echo $item->Naam ?>" aria-required="true"></td>
@@ -57,3 +53,4 @@ function get_data() {
 		<input type="submit" value="Lid bijwerken" class="button button-primary"/>
 	</form>
 </div>
+

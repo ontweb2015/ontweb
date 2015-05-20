@@ -20,11 +20,12 @@ function dnh_lid_details_on_admin_menu() {
     * 5: slug van deze page
     * 6: PHP functie die wordt aangeroepen als de gebruiker de page oproept.
     */
-	add_submenu_page( null		, 'Details'  , 'Details'  , 'manage_options', 'dnh_lid_details'       , 'dnh_lid_details_list'   );
-	add_submenu_page( null      , 'Nieuwe Leden'     , 'Nieuw'      , 'manage_options', 'dnh_lid_details_create', 'dnh_lid_details_create' );
+	add_submenu_page( null		, 'DetailsLid'  , 'DetailsLid'  , 'manage_options', 'dnh_lid_details'       , 'dnh_lid_details_list'   );
 	add_submenu_page( null      , 'Lid Bewerken'   , 'Bewerken'   , 'manage_options', 'dnh_lid_details_edit'  , 'dnh_lid_details_edit'   );
 	add_submenu_page( null		, 'DetailsSchip'  , 'DetailsSchip'  , 'manage_options', 'dnh_lid_details' , 'dnh_schip_details_list'   );
-
+	add_submenu_page( null		, 'Schip toevoegen'  , 'Toevoegen'  , 'manage_options', 'dnh_schip_details_create' , 'dnh_schip_details_create'   );
+	add_submenu_page( null		, 'Schip bewerken'  , 'Bewerken'  , 'manage_options', 'dnh_schip_details_edit' , 'dnh_schip_details_edit'   );
+	add_submenu_page( null		, 'Schip verwijderen'  , 'Verwijderen'  , 'manage_options', 'dnh_schip_details_delete' , 'dnh_schip_details_delete'   );
 }
 
 /**
@@ -66,13 +67,13 @@ function dnh_schip_details_list() {
 	include( 'schip_details-list.inc.php' );
 }
 
-/*
+
 function dnh_lid_details_create() {
    // Beperk toegang
    if ( !current_user_can( 'manage_options' ) )  {
       wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
    }
-	include( 'lid_details-create.inc.php' );
+	include( 'lid_details_create.inc.php' );
 }
 
 function dnh_lid_details_edit() {
@@ -80,7 +81,7 @@ function dnh_lid_details_edit() {
    if ( !current_user_can( 'manage_options' ) )  {
       wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
    }
-   if ( !isset( $_GET['lid'] ) )  {
+   if ( !isset( $_GET['LidId'] ) )  {
       wp_die( __( 'You do not sent sufficient data to use this page.' ) );
    }
    
@@ -88,6 +89,6 @@ function dnh_lid_details_edit() {
    global $wpdb;
    $item = $wpdb->get_row("SELECT * FROM DNH_LID WHERE ID = $id");
 
-	include( 'lid_details-edit.inc.php' );
-}*/
+	include( 'lid_details_edit.inc.php' );
+}
 ?>
