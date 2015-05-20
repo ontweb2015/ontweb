@@ -5,6 +5,11 @@ Script: leden-edit.inc.php
 Doel  : "Template" voor het bewerken van een bestaand lid.
 Auteur: Rajenco
 *******************************************************************************************************/
+function get_data() {
+        global $wpdb; //This is used only if making any database queries
+        return $wpdb->get_results("SELECT * FROM LID WHERE LidId= ' ".$_GET['LidId']." ' ");
+	}
+
 ?>
 <div class="wrap">
 	<h2>Bewerk lid</h2>
@@ -22,10 +27,6 @@ Auteur: Rajenco
 		<!-- En nu... de inhoud van het form -->
 		<table class="form-table">
 			<tbody>
-				<tr class="form-field form-required">
-					<th scope="row"><label for="lidid">Lid ID: <span class="description">(verplicht)</span></label></th>
-					<td><input name="id" type="text" id="id" value="<?php echo $item->LidID ?>" aria-required="true"></td>
-				</tr>
 				<tr class="form-field form-required">
 					<th scope="row"><label for="naam">Naam: <span class="description">(verplicht)</span></label></th>
 					<td><input name="naam" type="text" id="naam" value="<?php echo $item->Naam ?>" aria-required="true"></td>

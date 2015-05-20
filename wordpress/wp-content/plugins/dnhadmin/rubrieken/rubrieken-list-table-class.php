@@ -82,7 +82,7 @@ class DNHRubrieken_List_Table extends WP_List_Table {
     function get_columns(){
         $columns = array(
             'cb'        => '<input type="checkbox" />', //Render a checkbox instead of text
-            'id'     => 'Code',
+            'rubriekid'     => 'Code',
             'naam'    => 'Naam',
             'omschrijving' => 'Omschrijving'
         );
@@ -105,7 +105,7 @@ class DNHRubrieken_List_Table extends WP_List_Table {
      **************************************************************************/
     function get_sortable_columns() {
         $sortable_columns = array(
-            'id'     => array('id',true),     //true means it's already sorted
+            'rubriekid'     => array('rubriekid',true),     //true means it's already sorted
             'naam'    => array('naam',false)
         );
         return $sortable_columns;
@@ -126,20 +126,20 @@ class DNHRubrieken_List_Table extends WP_List_Table {
         return sprintf(
             '<input type="checkbox" name="%1$s[]" value="%2$s" />',
             /*$1%s*/ $this->_args['singular'],  //Let's simply repurpose the table's singular label ("movie")
-            /*$2%s*/ $item->ID                //The value of the checkbox should be the record's id
+            /*$2%s*/ $item->RubriekId                //The value of the checkbox should be the record's id
         );
     }
 	
-	function column_id($item) {
+	function column_rubriekid($item) {
         //Build row actions
         $actions = array(
-            'edit'      => sprintf( '<a href="?page=%s&%s=%s">%s</a>'  ,'dnh_rubrieken_edit'  ,$this->_args['singular'], $item->ID, __( 'Edit' ) ),
-            'delete'    => sprintf( '<a href="?page=%s&%s=%s">%s</a>','dnh_rubrieken_delete',$this->_args['singular'], $item->ID, __( 'Delete' ) ),
+            'edit'      => sprintf( '<a href="?page=%s&%s=%s">%s</a>'  ,'dnh_rubrieken_edit'  ,$this->_args['singular'], $item->RubriekId, __( 'Edit' ) ),
+            'delete'    => sprintf( '<a href="?page=%s&%s=%s">%s</a>','dnh_rubrieken_delete',$this->_args['singular'], $item->RubriekId, __( 'Delete' ) ),
         );
         
         //Return the title contents
         return sprintf('%1$s %2$s',
-            /*$1%s*/ $item->ID,
+            /*$1%s*/ $item->RubriekId,
             /*$2%s*/ $this->row_actions($actions)
         );
 	}

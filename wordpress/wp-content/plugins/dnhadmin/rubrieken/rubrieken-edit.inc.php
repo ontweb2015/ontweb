@@ -23,8 +23,8 @@ Auteur: BugSlayer
 		<table class="form-table">
 			<tbody>
 				<tr class="form-field form-required">
-					<th scope="row"><label for="id">Code <span class="description">(verplicht)</span></label></th>
-					<td><input name="id" type="text" id="id" value="<?php echo $item->ID ?>" aria-required="true"></td>
+					<th scope="row"><label for="rubriekid">Code <span class="description">(verplicht)</span></label></th>
+					<td><input name="rubriekid" type="text" id="rubriekid" value="<?php echo $item->RubriekId ?>" aria-required="true"></td>
 				</tr>
 				<tr class="form-field form-required">
 					<th scope="row"><label for="naam">Naam <span class="description">(verplicht)</span></label></th>

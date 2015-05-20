@@ -1,10 +1,15 @@
 <?php
 /*******************************************************************************************************
 Plugin: DNHAdmin
-Script: lid_details-edit.inc.php
+Script: lid_details_edit.inc.php
 Doel  : "Template" voor het bewerken van een bestaande Rubiek
 Auteur: BugSlayer
 *******************************************************************************************************/
+
+function get_data() {
+        global $wpdb; //This is used only if making any database queries
+        return $wpdb->get_results("SELECT * FROM LID WHERE LidId= ' ".$_GET['LidId']." ' ");
+}
 ?>
 <div class="wrap">
 	<h2>Bewerk lid</h2>
@@ -23,16 +28,24 @@ Auteur: BugSlayer
 		<table class="form-table">
 			<tbody>
 				<tr class="form-field form-required">
-					<th scope="row"><label for="id">Code <span class="description">(verplicht)</span></label></th>
-					<td><input name="id" type="text" id="id" value="<?php echo $item->ID ?>" aria-required="true"></td>
-				</tr>
-				<tr class="form-field form-required">
-					<th scope="row"><label for="naam">Naam <span class="description">(verplicht)</span></label></th>
+					<th scope="row"><label for="naam">Naam: <span class="description">(verplicht)</span></label></th>
 					<td><input name="naam" type="text" id="naam" value="<?php echo $item->Naam ?>" aria-required="true"></td>
 				</tr>
 				<tr class="form-field">
-					<th scope="row"><label for="omschrijving">Omschrijving </label></th>
-					<td><input name="omschrijving" type="text" id="omschrijving" value="<?php echo $item->Omschrijving ?>" aria-required="false"></td>
+					<th scope="row"><label for="adres">Adres: </label></th>
+					<td><input name="adres" type="text" id="adres" value="<?php echo $item->Adres ?>" aria-required="false"></td>
+				</tr>
+				<tr class="form-field">
+					<th scope="row"><label for="woonplaats">Woonplaats: </label></th>
+					<td><input name="woonplaats" type="text" id="woonplaats" value="<?php echo $item->Woonplaats ?>" aria-required="false"></td>
+				</tr>
+				<tr class="form-field">
+					<th scope="row"><label for="telefoonnummer">Telefoonnummer: </label></th>
+					<td><input name="telefoonnummer" type="text" id="telefoonnummer" value="<?php echo $item->Telefoonnummer ?>" aria-required="false"></td>
+				</tr>
+				<tr class="form-field">
+					<th scope="row"><label for="emailadres">Emailadres: </label></th>
+					<td><input name="emailadres" type="text" id="emailadres" value="<?php echo $item->Emailadres ?>" aria-required="false"></td>
 				</tr>
 			</tbody>
 		</table>
@@ -40,3 +53,4 @@ Auteur: BugSlayer
 		<input type="submit" value="Lid bijwerken" class="button button-primary"/>
 	</form>
 </div>
+

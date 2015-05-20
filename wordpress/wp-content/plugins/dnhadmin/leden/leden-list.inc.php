@@ -17,26 +17,21 @@ if ( !current_user_can( 'manage_options' ) )  {
 	<h2>Leden</h2>
 
     <!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions -->
-    <form id="<?php echo $items ?>-filter" method="get" action="admin.php?page=dnh_leden_edit&LidId=<?php $_GET['lid']?>">
+    <form id="<?php echo $items ?>-filter" method="get">
         <!-- For plugins, we also need to ensure that the form posts back to our current page -->
         <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
         <!-- Now we can render the completed list table -->
         <?php 
         	$myListTable->display() ?>
-        	<input type="submit" value="test">
     </form>
     
 
 	<h2><?php 
 		if ( current_user_can( 'manage_options' ) )
 			echo ' <a href="' . admin_url('admin.php?page=dnh_leden_create') . '" class="add-new-h2">Nieuw lid</a>'; 
-			echo '<a href="' . admin_url('admin.php?page=dnh_leden_edit&LidId=' . $_POST["lid"]) . '" class="add-new-h2">Wijzig lid</a>';
 			
 		if ( ! empty( $_REQUEST['s'] ) )
 			printf( ' <span class="subtitle">' . __('Search results for &#8220;%s&#8221;') . '</span>', get_search_query() );
 		?>
 	</h2>
-	    <?php if(checked == true) {
-	    	echo $_POST["lid"]; 
-	    }?>
 </div>

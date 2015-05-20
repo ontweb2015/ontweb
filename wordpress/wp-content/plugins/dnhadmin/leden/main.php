@@ -25,7 +25,6 @@ function dnh_leden_on_admin_menu() {
     */
 	add_submenu_page( 'dnh_menu', 'Beheren Leden'  , 'Leden'  , 'manage_options', 'dnh_leden'       , 'dnh_leden_list'   );
 	add_submenu_page( null      , 'Nieuwe Leden'     , 'Nieuw'      , 'manage_options', 'dnh_leden_create', 'dnh_leden_create' );
-	add_submenu_page( null      , 'Lid Bewerken'   , 'Bewerken'   , 'manage_options', 'dnh_leden_edit'  , 'dnh_leden_edit'   );
 }
 
 /**
@@ -54,21 +53,4 @@ function dnh_leden_create() {
    }
 	include( 'leden-create.inc.php' );
 }
-
-function dnh_leden_edit() {
-   // Beperk toegang
-   if ( !current_user_can( 'manage_options' ) )  {
-      wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-   }
-   if ( !isset( $_GET['LidId'] ) )  {
-      wp_die( __( 'You do not sent sufficient data to use this page.' ) );
-   }
-   
-   $id = sanitize_text_field( $_GET['LidId'] );
-   global $wpdb;
-   $item = $wpdb->get_row("SELECT * FROM LID WHERE LidId = $id");
-
-	include( 'leden-edit.inc.php' );
-}
-
 ?>
