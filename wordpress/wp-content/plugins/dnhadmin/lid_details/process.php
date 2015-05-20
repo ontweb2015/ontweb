@@ -1,0 +1,81 @@
+<?php
+/*******************************************************************************************************
+Plugin: DNHAdmin
+Script: lid_details/process.php
+Doel  : Alles voor het verwerken van wijzigingen van leden.
+Auteur: Rajenco Noort
+*******************************************************************************************************/
+
+/**************************************************************** 
+BIJWERKEN VAN EEN lid
+Dit wordt aangeroepen zowel bij het bijwerken van een bestaand lid.
+*****************************************************************/
+// De Action Hook
+add_action( 'admin_post_dnh_save_lid_details', 'dnh_process_lid_details' );
+// De functie
+function dnh_process_lid_details() {
+  // Controleer de rechten
+  if ( !current_user_can( 'manage_options' ) )
+  {
+    wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+  }
+  // Check that nonce field
+  check_admin_referer( 'dnh_verify' );
+
+  // Ophalen en valideren van de data
+  $error_message = "";
+  $data = array();
+  if ( isset( $_POST['naam'] ) )
+  {
+    $data['Naam'] = sanitize_text_field( $_POST['naam'] );
+  } else {
+    $error_message .= 'Naam is niet ingevuld';
+  }
+  
+  if ( isset( $_POST['adres'] ) )
+  {
+    $data['Adres'] = sanitize_text_field( $_POST['adres'] );
+  } else {
+    $error_message .= 'Adres is niet ingevuld';
+  }
+  
+  if ( isset( $_POST['woonplaats'] ) )
+  {
+    $data['Woonplaats'] = sanitize_text_field( $_POST['woonplaats'] );
+  } else {
+    $error_message .= 'Woonplaats is niet ingevuld';
+  }
+  
+  if ( isset( $_POST['telefoonnummer'] ) )
+  {
+    $data['Telefoonnummer'] = sanitize_text_field( $_POST['telefoonnummer'] );
+  }
+  
+  if ( isset( $_POST['emailadres'] ) )
+  {
+    $data['Emailadres'] = sanitize_text_field( $_POST['emailadres'] );
+  }
+
+  if ( isset( $_POST['status'] ) )
+  {
+  	$data['status'] = $_POST['status'];
+  }
+
+  if(strlen($error_message) > 0) {
+    // Redirect met foutbericht voorbereiden
+    $qvars = array( 'page' => 'dnh_leden', 
+      'dnh_ntc' => 'error',
+      'dnh_ntm' => urlencode( $error_message )
+    );
+  } else {
+    global $wpdb;
+    $updates = $wpdb->update('LID', array( 'Naam'=>$naam, 'Adres'=>$adres, 'Woonplaats'=>$woonplaats, 'Telefoonnummer'=>$telefoonnummer, 'Emailadres'=>$emailadres, 'Status'=>$status,),"WHERE LidID =".$_GET["LidID"]);
+    // Redirect voorbereiden
+    $qvars = array( 'page' => 'dnh_lid_details', 
+      'dnh_ntc' => 'updated',
+      'dnh_ntm' => urlencode( 'Lid is succesvol aangemaakt' ) );
+  }
+  wp_redirect( add_query_arg( $qvars, admin_url( 'admin.php' ) ) );
+  exit;
+}
+?>

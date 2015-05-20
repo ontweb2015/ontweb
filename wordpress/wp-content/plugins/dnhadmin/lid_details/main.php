@@ -45,9 +45,22 @@ function dnh_lid_details_list() {
 	$myListTable = new DNHlid_details_List_Table();
 	//Fetch, prepare, sort, and filter our data...
 	$myListTable->prepare_items();
-	include( 'lid_details-list.inc.php' );
-	
-		
+	include( 'lid_details-list.inc.php' );	
+}
+
+function dnh_lid_details_edit() {
+   // Beperk toegang
+   if ( !current_user_can( 'manage_options' ) )  {
+      wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+   }
+   if ( !isset( $_GET['LidId'] ) )  {
+      wp_die( __( 'You do not sent sufficient data to use this page.' ) );
+   }
+   
+   global $wpdb;
+   $item = $wpdb->get_row("SELECT * FROM LID WHERE LidId= ' ".$_GET['LidId']." ' ");
+
+	include( 'lid_details_edit.inc.php' );
 }
 
 function dnh_schip_details_list() {
@@ -67,28 +80,4 @@ function dnh_schip_details_list() {
 	include( 'schip_details-list.inc.php' );
 }
 
-
-function dnh_lid_details_create() {
-   // Beperk toegang
-   if ( !current_user_can( 'manage_options' ) )  {
-      wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-   }
-	include( 'lid_details_create.inc.php' );
-}
-
-function dnh_lid_details_edit() {
-   // Beperk toegang
-   if ( !current_user_can( 'manage_options' ) )  {
-      wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-   }
-   if ( !isset( $_GET['LidId'] ) )  {
-      wp_die( __( 'You do not sent sufficient data to use this page.' ) );
-   }
-   
-   $id = sanitize_text_field( $_GET['lid'] );
-   global $wpdb;
-   $item = $wpdb->get_row("SELECT * FROM DNH_LID WHERE ID = $id");
-
-	include( 'lid_details_edit.inc.php' );
-}
 ?>

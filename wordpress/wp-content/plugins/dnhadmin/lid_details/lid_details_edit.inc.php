@@ -2,14 +2,9 @@
 /*******************************************************************************************************
 Plugin: DNHAdmin
 Script: lid_details_edit.inc.php
-Doel  : "Template" voor het bewerken van een bestaande Rubiek
-Auteur: BugSlayer
+Doel  : "Template" voor het bewerken van een bestaand lid.
+Auteur: Rajenco Noort
 *******************************************************************************************************/
-
-function get_data() {
-        global $wpdb; //This is used only if making any database queries
-        return $wpdb->get_results("SELECT * FROM LID WHERE LidId= ' ".$_GET['LidId']." ' ");
-}
 ?>
 <div class="wrap">
 	<h2>Bewerk lid</h2>
@@ -18,7 +13,7 @@ function get_data() {
 
 		<!-- We create a hidden field named action with the value corresponding.
 			 This value is important as we’ll be able to process the form. -->
-		<input type="hidden" name="action" value="dnh_save_lid" />
+		<input type="hidden" name="action" value="dnh_save_lid_details" />
 
 		<!-- This function is extremely useful and prevents your form from being submitted by a user other than an admin. 
 	    	 It’s a security measure	-->
@@ -28,7 +23,7 @@ function get_data() {
 		<table class="form-table">
 			<tbody>
 				<tr class="form-field form-required">
-					<th scope="row"><label for="naam">Naam: <span class="description">(verplicht)</span></label></th>
+					<th scope="row"><label for="naam">Naam: </label></th>
 					<td><input name="naam" type="text" id="naam" value="<?php echo $item->Naam ?>" aria-required="true"></td>
 				</tr>
 				<tr class="form-field">
@@ -46,6 +41,15 @@ function get_data() {
 				<tr class="form-field">
 					<th scope="row"><label for="emailadres">Emailadres: </label></th>
 					<td><input name="emailadres" type="text" id="emailadres" value="<?php echo $item->Emailadres ?>" aria-required="false"></td>
+				</tr>
+				<tr class="form-field form-required">
+					<th scope="row"><label for="status">Status: </label></th>
+					<td>
+						<select id="status" name="status">
+							<option value="1">Actief</option>
+							<option value="0">Non-actief</option>
+						</select>
+					</td>
 				</tr>
 			</tbody>
 		</table>
