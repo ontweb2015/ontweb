@@ -21,7 +21,6 @@ function dnh_factuur_on_admin_menu() {
 
 function printFactuur()
 {
-	
 		do_action("createInvoice");
 
 }
@@ -57,8 +56,6 @@ $sqlresult = $wpdb->get_results($sql, ARRAY_A );
 if(count($sqlresult) > 0)
 {
 		foreach ($sqlresult as $query) {
-			
-		
 		$liggeldlid = $query["LiggeldLid"];
 		$nieuwnummer = 0;
 		$html = '<html><body><style>
