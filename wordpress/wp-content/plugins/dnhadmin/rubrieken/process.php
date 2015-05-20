@@ -26,9 +26,9 @@ function dnh_process_rubriek() {
   // Ophalen en valideren van de data
   $error_message = "";
   $data = array();
-  if ( isset( $_POST['id'] ) )
+  if ( isset( $_POST['rubriekid'] ) )
   {
-    $data['RubriekId'] = sanitize_text_field( $_POST['id'] );
+    $data['RubriekId'] = sanitize_text_field( $_POST['rubriekid'] );
     if (!is_numeric($data['RubriekId'])) {
       $error_message .= 'Id veld is niet mumeriek';
     }
@@ -135,7 +135,7 @@ function dnh_process_delete_rubrieken() {
 
     // verwijderen rubrieken
     foreach ($rubrieken as $rubriek) {
-      $wpdb->delete( 'RUBRIEK', Array( 'ID' => $rubriek ) );
+      $wpdb->delete( 'RUBRIEK', Array( 'RubriekId' => $rubriek ) );
     }
     // Redirect voorbereiden
     $qvars = array( 'page' => 'dnh_rubrieken', 

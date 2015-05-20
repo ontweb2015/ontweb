@@ -134,7 +134,7 @@ class DNHLeden_List_Table extends WP_List_Table {
 	 * De checkbox links van de rij, waarmee je items kan selecteren
 	 */
     function column_radio($item){
-    	return "<input type='radio' name='lid' value='" . $item->LidId . "'>";
+    	return "<input type='radio' name='radiolid' value='" . $item->LidId . "'>";
     }
 	
 	function column_lidid($item) {
