@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************************************
 Plugin: DNHAdmin
-Script: Lid details-list.inc.php
+Script: Schip_details-list.inc.php
 Doel  : "Template" voor de pagina waarin de lijst met lid details wordt getoond.
 Auteur: Rajenco
 *******************************************************************************************************/
@@ -18,7 +18,7 @@ if ( !current_user_can( 'manage_options' ) )  {
 	<h2>Lid Details
 		<?php 
 		if ( current_user_can( 'manage_options' ) ) 
-			echo ' <a href="' . admin_url('admin.php?page=dnh_lid_details_create') . '" class="add-new-h2">Nieuw schip</a>';
+			echo ' <a href="' . admin_url('admin.php?page=dnh_schip_details_create') . '" class="add-new-h2">Nieuw schip</a>';
 		if ( ! empty( $_REQUEST['s'] ) )
 			printf( ' <span class="subtitle">' . __('Search results for &#8220;%s&#8221;') . '</span>', get_search_query() );
 		?>

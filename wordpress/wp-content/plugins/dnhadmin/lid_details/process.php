@@ -3,7 +3,7 @@
 Plugin: DNHAdmin
 Script: lid_details/process.php
 Doel  : Alles voor het verwerken van wijzigingen van leden.
-Auteur: Rajenco Noort
+Auteur: Rajenco
 *******************************************************************************************************/
 
 /**************************************************************** 
@@ -63,18 +63,143 @@ function dnh_process_lid_details() {
 
   if(strlen($error_message) > 0) {
     // Redirect met foutbericht voorbereiden
-    $qvars = array( 'page' => 'dnh_leden', 
+    $qvars = array( 'page' => 'dnh_lid_details', 
       'dnh_ntc' => 'error',
       'dnh_ntm' => urlencode( $error_message )
     );
   } else {
     global $wpdb;
-    $updates = $wpdb->update('LID', array( 'Naam'=>$naam, 'Adres'=>$adres, 'Woonplaats'=>$woonplaats, 'Telefoonnummer'=>$telefoonnummer, 'Emailadres'=>$emailadres, 'Status'=>$status,),"WHERE LidID =".$_GET["LidID"]);
+    $updates = $wpdb->update('LID', $data, Array( 'LidId' => $_GET['LidId'] ));
     // Redirect voorbereiden
     $qvars = array( 'page' => 'dnh_lid_details', 
       'dnh_ntc' => 'updated',
       'dnh_ntm' => urlencode( 'Lid is succesvol aangemaakt' ) );
   }
+  wp_redirect( add_query_arg( $qvars, admin_url( 'admin.php' ) ) );
+  exit;
+}
+
+
+add_action( 'admin_post_dnh_save_schip_details', 'dnh_process_schip_details' );
+// De functie
+function dnh_process_schip_details() {
+  // Controleer de rechten
+  if ( !current_user_can( 'manage_options' ) )
+  {
+    wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+  }
+  // Check that nonce field
+  check_admin_referer( 'dnh_verify' );
+
+  // Ophalen en valideren van de data
+  $error_message = "";
+  $data = array();
+  if ( isset( $_POST['naam'] ) )
+  {
+  	$data['Naam'] = sanitize_text_field( $_POST['naam'] );
+  } else {
+    $error_message .= 'Naam veld is niet meegestuurd';
+  }
+  
+  if ( isset( $_POST['lengte'] ) )
+  {
+  	$data['Lengte'] = sanitize_text_field( $_POST['lengte'] );
+  } else {
+    $error_message .= 'Lengte veld is niet meegestuurd';
+  }
+  
+  if ( isset( $_POST['type'] ) )
+  {
+  	$data['type'] = $_POST['type'];
+  }
+  
+  if ( isset( $_POST['lid_lidid'] ) )
+  {
+  	$data['lid_lidid'] = $_POST['lid_lidid'];
+  }
+
+  if(strlen($error_message) > 0) {
+    // Redirect met foutbericht voorbereiden
+    $qvars = array( 'page' => 'dnh_lid_details', 
+      'dnh_ntc' => 'error',
+      'dnh_ntm' => urlencode( $error_message )
+    );
+  } else {
+    global $wpdb;
+    $updates = $wpdb->insert('SCHIP', $data);
+    // Redirect voorbereiden
+    $qvars = array( 'page' => 'dnh_lid_details', 
+      'dnh_ntc' => 'updated',
+      'dnh_ntm' => urlencode( 'Schip is succesvol aangemaakt' ) );
+  }
+  wp_redirect( add_query_arg( $qvars, admin_url( 'admin.php' ) ) );
+  exit;
+}
+
+/**************************************************************** 
+VERWIJDEREN VAN EEN Schip
+Dit wordt aangeroepen als één of meer schepen moeten worden
+verwijderd.
+*****************************************************************/
+// De Action Hook
+add_action( 'admin_post_dnh_delete_schip_details', 'dnh_process_delete_schip_details' );
+// De functie
+function dnh_process_delete_schip_details() {
+  // Controleer de rechten
+  if ( !current_user_can( 'manage_options' ) )
+  {
+    wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+  }
+  // Check that nonce field
+  check_admin_referer( 'dnh_verify' );
+
+  // TODO nog te implementeren
+
+  // ophalen schepen
+  $error_message = "";
+  // Ophalen en valideren van de data
+  // Alle gemarkeerde rubrieken in een array stoppen
+  $rubrieken = Array();
+  if (isset($_POST['schip'])) {
+    $value = $_POST['schip'];
+    if (is_array($value)) {
+      foreach ($value as $val) {
+        $schepen[] = sanitize_text_field($val);
+      }
+    } else {
+      $schepen[] = sanitize_text_field($value);
+    }
+  } else {
+    $error_message .= 'Er zijn geen schepen meegestuurd';
+  }
+
+  foreach ($schepen as $schip) {
+    if (!is_numeric($schip)) {
+      $error_message .= 'Schip $schip is niet geldig';
+    }
+  }
+
+  if(strlen($error_message) > 0) {
+    // Redirect voorbereiden
+    $qvars = array( 'page' => 'dnh_lid_details', 
+      'dnh_ntc' => 'error',
+      'dnh_ntm' => urlencode( $error_message )
+    );
+  } else {
+    global $wpdb; //This is used only if making any database queries
+    // TODO aanpassen van de transacties, mbv SQL
+
+    // verwijderen rubrieken
+    foreach ($schepen as $schip) {
+      $wpdb->delete( 'SCHIP', Array( 'SchipId' => $schip ) );
+    }
+    // Redirect voorbereiden
+    $qvars = array( 'page' => 'dnh_lide_details', 
+      'dnh_ntc' => 'updated',
+      'dnh_ntm' => urlencode( 'Schip succesvol verwijderd' ) 
+     );
+  }
+  //echo add_query_arg( $qvars, admin_url( 'admin.php' ));
   wp_redirect( add_query_arg( $qvars, admin_url( 'admin.php' ) ) );
   exit;
 }

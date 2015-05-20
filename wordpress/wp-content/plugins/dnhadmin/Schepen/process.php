@@ -139,12 +139,12 @@ function dnh_process_delete_schepen() {
 
     // verwijderen rubrieken
     foreach ($leden as $lid) {
-      $wpdb->delete( 'DNH_LID', Array( 'ID' => $lid ) );
+      $wpdb->delete( 'SCHIP', Array( 'ID' => $lid ) );
     }
     // Redirect voorbereiden
     $qvars = array( 'page' => 'dnh_leden', 
       'dnh_ntc' => 'updated',
-      'dnh_ntm' => urlencode( 'Rubriek(en) succesvol verwijderd' ) 
+      'dnh_ntm' => urlencode( 'Schip succesvol verwijderd' ) 
      );
   }
   //echo add_query_arg( $qvars, admin_url( 'admin.php' ));
