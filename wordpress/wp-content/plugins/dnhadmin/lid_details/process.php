@@ -25,6 +25,16 @@ function dnh_process_lid_details() {
   // Ophalen en valideren van de data
   $error_message = "";
   $data = array();
+  if ( isset( $_POST['lidid'] ) )
+  {
+    $data['LidId'] = sanitize_text_field( $_POST['lidid'] );
+    if (!is_numeric($data['LidId'])) {
+      $error_message .= 'Id veld is niet mumeriek';
+    }
+  } else {
+    $error_message .= 'Id veld is niet meegestuurd';
+  }
+  
   if ( isset( $_POST['naam'] ) )
   {
     $data['Naam'] = sanitize_text_field( $_POST['naam'] );
@@ -49,16 +59,22 @@ function dnh_process_lid_details() {
   if ( isset( $_POST['telefoonnummer'] ) )
   {
     $data['Telefoonnummer'] = sanitize_text_field( $_POST['telefoonnummer'] );
+  } else {
+    $error_message .= 'Telefoonnummer is niet ingevuld';
   }
   
   if ( isset( $_POST['emailadres'] ) )
   {
     $data['Emailadres'] = sanitize_text_field( $_POST['emailadres'] );
+  } else {
+    $error_message .= 'Emailadres is niet ingevuld';
   }
 
   if ( isset( $_POST['status'] ) )
   {
-  	$data['status'] = $_POST['status'];
+  	$data['Status'] = $_POST['status'];
+  } else {
+    $error_message .= 'Status is niet ingevuld';
   }
 
   if(strlen($error_message) > 0) {
@@ -68,18 +84,21 @@ function dnh_process_lid_details() {
       'dnh_ntm' => urlencode( $error_message )
     );
   } else {
-    global $wpdb;
-    $updates = $wpdb->update('LID', $data, Array( 'LidId' => $_GET['LidId'] ));
+    global $wpdb; //This is used only if making any database queries
+    $updates = $wpdb->replace('LID', $data);
     // Redirect voorbereiden
     $qvars = array( 'page' => 'dnh_lid_details', 
       'dnh_ntc' => 'updated',
-      'dnh_ntm' => urlencode( 'Lid is succesvol aangemaakt' ) );
+      'dnh_ntm' => urlencode( 'Lid is succesvol bijgewerkt' ) );
   }
   wp_redirect( add_query_arg( $qvars, admin_url( 'admin.php' ) ) );
   exit;
 }
 
-
+/**************************************************************** 
+BIJWERKEN VAN EEN schip
+Dit wordt aangeroepen zowel bij het bijwerken van een bestaand schip.
+*****************************************************************/
 add_action( 'admin_post_dnh_save_schip_details', 'dnh_process_schip_details' );
 // De functie
 function dnh_process_schip_details() {
@@ -159,7 +178,7 @@ function dnh_process_delete_schip_details() {
   $error_message = "";
   // Ophalen en valideren van de data
   // Alle gemarkeerde rubrieken in een array stoppen
-  $rubrieken = Array();
+  $schepen = Array();
   if (isset($_POST['schip'])) {
     $value = $_POST['schip'];
     if (is_array($value)) {
@@ -181,7 +200,7 @@ function dnh_process_delete_schip_details() {
 
   if(strlen($error_message) > 0) {
     // Redirect voorbereiden
-    $qvars = array( 'page' => 'dnh_lid_details', 
+    $qvars = array( 'page' => 'dnh_schepen', 
       'dnh_ntc' => 'error',
       'dnh_ntm' => urlencode( $error_message )
     );
@@ -194,7 +213,7 @@ function dnh_process_delete_schip_details() {
       $wpdb->delete( 'SCHIP', Array( 'SchipId' => $schip ) );
     }
     // Redirect voorbereiden
-    $qvars = array( 'page' => 'dnh_lide_details', 
+    $qvars = array( 'page' => 'dnh_schepen', 
       'dnh_ntc' => 'updated',
       'dnh_ntm' => urlencode( 'Schip succesvol verwijderd' ) 
      );

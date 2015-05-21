@@ -57,8 +57,9 @@ function dnh_lid_details_edit() {
       wp_die( __( 'You do not sent sufficient data to use this page.' ) );
    }
    
+   $id = sanitize_text_field( $_GET['LidId'] );
    global $wpdb;
-   $item = $wpdb->get_row("SELECT * FROM LID WHERE LidId= ' ".$_GET['LidId']." ' ");
+   $item = $wpdb->get_row("SELECT * FROM LID WHERE LidId = $id");
 
 	include( 'lid_details-edit.inc.php' );
 }
@@ -85,7 +86,7 @@ function dnh_schip_details_create() {
    if ( !current_user_can( 'manage_options' ) )  {
       wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
    }
-	include( 'schip_details-create.php' );
+	include( 'schip_details-create.inc.php' );
 }
 
 function dnh_schip_details_edit() {
@@ -93,14 +94,23 @@ function dnh_schip_details_edit() {
    if ( !current_user_can( 'manage_options' ) )  {
       wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
    }
-   if ( !isset( $_GET['SchipId'] ) )  {
+   if ( !isset( $_GET['schip'] ) )  {
       wp_die( __( 'You do not sent sufficient data to use this page.' ) );
    }
    
+   $id = sanitize_text_field( $_GET['schip'] );
    global $wpdb;
-   $item = $wpdb->get_row("SELECT * FROM SCHIP WHERE SchipId= ' ".$_GET['SchipId']." ' ");
+   $item = $wpdb->get_row("SELECT * FROM SCHIP WHERE SchipId = $id");
 
 	include( 'schip_details-edit.inc.php' );
+}
+
+function dnh_schip_details_delete() {
+   // Beperk toegang
+   if ( !current_user_can( 'manage_options' ) )  {
+      wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+   }
+   include( 'schip_details-delete.inc.php' );
 }
 
 ?>

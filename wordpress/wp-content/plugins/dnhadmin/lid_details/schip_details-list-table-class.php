@@ -176,9 +176,26 @@ class DNHschip_details_List_Table extends WP_List_Table {
      **************************************************************************/
     function get_bulk_actions() {
         $actions = array(
-            'delete'    => __( 'Delete' )
+            'delete'    => __( 'Delete' ),
+			'bewerken'  => __( 'Bewerken' )
         );
         return $actions;
+    }
+
+	/** ************************************************************************
+     * Optional. You can handle your bulk actions anywhere or anyhow you prefer.
+     * For this example package, we will handle it in the class to keep things
+     * clean and organized.
+     * 
+     * @see $this->prepare_items()
+     **************************************************************************/
+    function process_bulk_action() {
+        
+        //Detect when a bulk action is being triggered...
+        if( 'delete'===$this->current_action() ) {
+            wp_die('Schepen verwijderd (or they would be if we had items to delete)!');
+        }
+        
     }
 
     /** ************************************************************************

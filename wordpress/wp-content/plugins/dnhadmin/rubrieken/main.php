@@ -68,7 +68,7 @@ function dnh_rubrieken_edit() {
    
    $id = sanitize_text_field( $_GET['rubriek'] );
    global $wpdb;
-   $item = $wpdb->get_row("SELECT * FROM DNH_RUBRIEK WHERE RubriekId = $id");
+   $item = $wpdb->get_row("SELECT * FROM RUBRIEK WHERE RubriekId = $id");
 
 	include( 'rubrieken-edit.inc.php' );
 }

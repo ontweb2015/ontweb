@@ -69,15 +69,12 @@ function dnh_process_schip() {
 }
 
 /**************************************************************** 
-VERWIJDEREN VAN EEN RUBRIEK, EN BIJWERKEN VAN DAARAAN GEKOPPELDE 
-TRANSACTIES
-Dit wordt aangeroepen als één of meer rubrieken moeten worden
-verwijderd.
+VERWIJDEREN VAN EEN SCHIP.
 *****************************************************************/
 // De Action Hook
-add_action( 'admin_post_dnh_delete_leden', 'dnh_process_delete_rubrieken' );
+add_action( 'admin_post_dnh_delete_schip', 'dnh_process_delete_schip' );
 // De functie
-function dnh_process_delete_schepen() {
+function dnh_process_delete_schip() {
   // Controleer de rechten
   if ( !current_user_can( 'manage_options' ) )
   {
@@ -93,43 +90,29 @@ function dnh_process_delete_schepen() {
   // Ophalen en valideren van de data
   // Alle gemarkeerde rubrieken in een array stoppen
   $leden = Array();
-  if (isset($_POST['lid'])) {
-    $value = $_POST['lid'];
+  if (isset($_POST['schip'])) {
+    $value = $_POST['schip'];
     if (is_array($value)) {
       foreach ($value as $val) {
-        $leden[] = sanitize_text_field($val);
+        $schepen[] = sanitize_text_field($val);
       }
     } else {
-      $rubrieken[] = sanitize_text_field($value);
+      $schepen[] = sanitize_text_field($value);
     }
   } else {
-    $error_message .= 'Er zijn geen leden meegestuurd';
+    $error_message .= 'Er zijn geen schepen meegestuurd';
   }
 
-  foreach ($leden as $lid) {
-    if (!is_numeric($lid)) {
-      $error_message .= 'Lid $lid is niet geldig';
+  foreach ($schepen as $schip) {
+    if (!is_numeric($schip)) {
+      $error_message .= 'Schip $schip is niet geldig';
     }
-  }
-
-  if ( isset( $_POST['trans_action'] ) )
-  {
-    $what_to_do_with_transactions = sanitize_text_field( $_POST['trans_action'] );
-  } else {
-    $error_message .= 'Er is niet aangegeven wat er gedaan moet worden met de transacties';
-  }
-  if ( isset( $_POST['nwe_lid'] ) )
-  {
-    $nwe_transactie = sanitize_text_field( $_POST['nwe_lid'] );
-  } else {
-    if ($what_to_do_with_transactions==='rubr')
-      $error_message .= 'Er is geen nieuwe lid meegestuurd';
-  }
+ }
 
 
   if(strlen($error_message) > 0) {
     // Redirect voorbereiden
-    $qvars = array( 'page' => 'dnh_leden', 
+    $qvars = array( 'page' => 'dnh_schepen', 
       'dnh_ntc' => 'error',
       'dnh_ntm' => urlencode( $error_message )
     );
@@ -137,12 +120,12 @@ function dnh_process_delete_schepen() {
     global $wpdb; //This is used only if making any database queries
     // TODO aanpassen van de transacties, mbv SQL
 
-    // verwijderen rubrieken
-    foreach ($leden as $lid) {
-      $wpdb->delete( 'SCHIP', Array( 'ID' => $lid ) );
+    // verwijderen schip
+    foreach ($schepen as $schip) {
+      $wpdb->delete( 'SCHIP', Array( 'SchipId' => $lid ) );
     }
     // Redirect voorbereiden
-    $qvars = array( 'page' => 'dnh_leden', 
+    $qvars = array( 'page' => 'dnh_schepen', 
       'dnh_ntc' => 'updated',
       'dnh_ntm' => urlencode( 'Schip succesvol verwijderd' ) 
      );

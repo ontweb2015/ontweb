@@ -22,6 +22,7 @@ Auteur: Rajenco Noort
 		<!-- En nu... de inhoud van het form -->
 		<table class="form-table">
 			<tbody>
+				<td><input type='hidden' name="lidid" type="int" id="lidid" value="<?php $_GET['LidId'] ?>" aria-required="true"></td>
 				<tr class="form-field form-required">
 					<th scope="row"><label for="naam">Naam: </label></th>
 					<td><input name="naam" type="text" id="naam" value="<?php echo $item->Naam ?>" aria-required="true"></td>
