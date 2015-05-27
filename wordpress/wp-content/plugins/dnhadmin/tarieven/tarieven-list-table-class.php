@@ -146,19 +146,19 @@ class DNHTarieven_List_Table extends WP_List_Table {
 	}
 	
 	function column_contributie_leden($item) {
-		return "€".$item->Contributie_leden;
+		return "€".$item->Contributiebedrag;
 	}
 	
     function column_energietoeslag_leden($item) {
-        return "€".$item->Energietoeslag_leden;
+        return "€".$item->Energietoeslag;
     }
     
     function column_liggeld_leden($item) {
-        return "€".$item->Liggeld_leden;
+        return "€".$item->LiggeldLid;
     }
     
     function column_liggeld_passanten($item) {
-        return "€".$item->Liggeld_passanten;
+        return "€".$item->LiggeldPassant;
     }
     
      
