@@ -23,16 +23,13 @@ function dnh_process_lid_details() {
   check_admin_referer( 'dnh_verify' );
 
   // Ophalen en valideren van de data
-  $error_message = "";
+  $error_message = Array();
   $data = array();
   if ( isset( $_POST['lidid'] ) )
   {
     $data['LidId'] = sanitize_text_field( $_POST['lidid'] );
-    if (!is_numeric($data['LidId'])) {
-      $error_message .= 'Id veld is niet mumeriek';
-    }
   } else {
-    $error_message .= 'Id veld is niet meegestuurd';
+    $error_message .= 'ID is niet meegestuurd';
   }
   
   if ( isset( $_POST['naam'] ) )
@@ -72,24 +69,28 @@ function dnh_process_lid_details() {
 
   if ( isset( $_POST['status'] ) )
   {
-  	$data['Status'] = $_POST['status'];
-  } else {
-    $error_message .= 'Status is niet ingevuld';
+  	$data['status'] = $_POST['status'];
   }
 
-  if(strlen($error_message) > 0) {
-    // Redirect met foutbericht voorbereiden
-    $qvars = array( 'page' => 'dnh_lid_details', 
-      'dnh_ntc' => 'error',
-      'dnh_ntm' => urlencode( $error_message )
-    );
+  $qvars = array( 'page' => 'dnh_leden');
+  if(count($error_message) > 0) {
+    if ( isset( $data['LidId'] ) ) {
+      // Probeer weer te redirecten naar de edit-pagina
+      $qvars['page'] = 'dnh_lid_details_edit';
+      $qvars['lid'] = $data['LidId'];
+    }
+    $qvars['dnh_ntc'] = 'error';
+    $qvars['dnh_ntm'] = urlencode( join( ', ', $error_message ) );
   } else {
     global $wpdb; //This is used only if making any database queries
     $updates = $wpdb->replace('LID', $data);
+    if ($updates === FALSE) {
+      $qvars['dnh_ntc'] = 'error';
+      $qvars['dnh_ntm'] = urlencode( __( 'Could not execute query: ' ) . $wpdb->last_error );
+    }
     // Redirect voorbereiden
-    $qvars = array( 'page' => 'dnh_lid_details', 
-      'dnh_ntc' => 'updated',
-      'dnh_ntm' => urlencode( 'Lid is succesvol bijgewerkt' ) );
+    $qvars['dnh_ntc'] = 'updated';
+    $qvars['dnh_ntm'] = urlencode( "Lid succesvol bijgewerkt." );
   }
   wp_redirect( add_query_arg( $qvars, admin_url( 'admin.php' ) ) );
   exit;

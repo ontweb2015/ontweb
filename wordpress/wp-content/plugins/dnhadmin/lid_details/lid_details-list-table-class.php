@@ -229,9 +229,7 @@ class DNHlid_details_List_Table extends WP_List_Table {
             'per_page'    => $per_page,                     //WE have to determine how many items to show on a page
             'total_pages' => ceil($total_items/$per_page)   //WE have to calculate the total number of pages
         ) );
-    }
-    
-    
+    }    
 }
 
 ?>

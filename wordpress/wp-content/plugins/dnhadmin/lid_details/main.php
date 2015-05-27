@@ -7,6 +7,9 @@ Doel  : Hoofd bestand voor de details van een lid, combineert het weergeven van 
 Auteur: Rajenco
 *******************************************************************************************************/
 
+// Include het script dat wijzigingen op de database verwerkt.
+require_once('process.php');
+
 /**
  * Aangeroepen tijdens de 'admin_menu' action
  */
