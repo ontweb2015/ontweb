@@ -87,6 +87,7 @@ class DNHschip_details_List_Table extends WP_List_Table {
             'Lengte' => 'Lengte',
             'Type' => 'Type',
             'Lid_LidId' => 'Eigenaar',
+            'Bewerken' => 'Bewerken'
         );
         return $columns;
     }
@@ -151,6 +152,10 @@ class DNHschip_details_List_Table extends WP_List_Table {
 		global $wpdb;
 		return $result = $wpdb->get_var("SELECT Naam FROM lid WHERE LidId= ' ". $item->Lid_LidId ." ' ");
 	}
+	
+	function column_bewerken($item) {
+		return "<a href='admin.php?page=dnh_schip_details_edit&SchipId=" . $item->SchipId . "'>" . bewerken . "</a>";
+	}
     
    /** ************************************************************************
  	 * Functie die aangeroepen wordt als PHP niet de goede functie kan vinden
@@ -176,8 +181,7 @@ class DNHschip_details_List_Table extends WP_List_Table {
      **************************************************************************/
     function get_bulk_actions() {
         $actions = array(
-            'delete'    => __( 'Delete' ),
-			'bewerken'  => __( 'Bewerken' )
+            'delete'    => __( 'Delete' )
         );
         return $actions;
     }

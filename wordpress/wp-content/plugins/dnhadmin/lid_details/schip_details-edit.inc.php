@@ -13,7 +13,7 @@ Auteur: Rajenco
 
 		<!-- We create a hidden field named action with the value corresponding.
 			 This value is important as we’ll be able to process the form. -->
-		<input type="hidden" name="action" value="dnh_save_schip_details" />
+		<input type="hidden" name="action" value="dnh_save_edit_schip_details" />
 
 		<!-- This function is extremely useful and prevents your form from being submitted by a user other than an admin. 
 	    	 It’s a security measure	-->
@@ -22,6 +22,9 @@ Auteur: Rajenco
 		<!-- En nu... de inhoud van het form -->
 		<table class="form-table">
 			<tbody>
+				<tr>
+					<td><input type='hidden' name="schipid" type="text" id="schipid" value="<?php echo $_GET['SchipId'] ?>"></td>
+				</tr>
 				<tr class="form-field form-required">
 					<th scope="row"><label for="naam">Naam: <span class="description">(verplicht)</span></label></th>
 					<td><input name="naam" type="text" id="naam" value="<?php echo $item->Naam ?>" aria-required="true"></td>

@@ -14,7 +14,7 @@ if (!current_user_can('manage_options')) {
 // Bepaal nu wat te renderen (bulk acties leidt Wordpress automatisch hier naartoe)
 if ('delete'===$myListTable->current_action()) {
 	// Laat een pagina zien die de bulk-action 'delete' afhandelt
-	include('lid_details-delete.inc.php');
+	include('schip_details-delete.inc.php');
 } else {
 // De lijst renderen
 ?>

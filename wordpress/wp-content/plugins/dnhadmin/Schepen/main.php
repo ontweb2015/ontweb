@@ -1,4 +1,4 @@
-<?php
++<?php
 /*******************************************************************************************************
 Plugin: DNHAdmin
 Script: rubrieken/main.php
@@ -26,6 +26,7 @@ function dnh_schepen_on_admin_menu() {
 	add_submenu_page( 'dnh_menu', 'Beheren schepen'  , 'Schepen'  , 'manage_options', 'dnh_schepen'       , 'dnh_schepen_list'   );
 	add_submenu_page( null      , 'Nieuwe schepen'     , 'Nieuw'      , 'manage_options', 'dnh_schepen_create', 'dnh_schepen_create' );
 	add_submenu_page( null      , 'schip Bewerken'   , 'Bewerken'   , 'manage_options', 'dnh_schepen_edit'  , 'dnh_schepen_edit'   );
+	add_submenu_page( null      , 'Schip verwijderen'   , 'Verwijderen'   , 'manage_options', 'dnh_schepen_delete'  , 'dnh_schepen_delete'   );
 
 }
 
@@ -61,15 +62,22 @@ function dnh_schepen_edit() {
    if ( !current_user_can( 'manage_options' ) )  {
       wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
    }
-   if ( !isset( $_GET['lid'] ) )  {
+   if ( !isset( $_GET['SchipId'] ) )  {
       wp_die( __( 'You do not sent sufficient data to use this page.' ) );
    }
    
-   $id = sanitize_text_field( $_GET['lid'] );
+   $id = sanitize_text_field( $_GET['SchipId'] );
    global $wpdb;
-   $item = $wpdb->get_row("SELECT * FROM DNH_LID WHERE ID = $id");
+   $item = $wpdb->get_row("SELECT * FROM SCHIP WHERE SchipId = $id");
 
 	include( 'schepen-edit.inc.php' );
 }
 
+function dnh_schepen_delete() {
+   // Beperk toegang
+   if ( !current_user_can( 'manage_options' ) )  {
+      wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+   }
+   include( 'schepen-delete.inc.php' );
+}
 ?>
