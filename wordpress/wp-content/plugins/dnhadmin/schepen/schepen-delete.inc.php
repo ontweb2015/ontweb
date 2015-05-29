@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************************************
 Plugin: DNHAdmin
-Script: schip_details_delete.inc.php
+Script: schip_delete.inc.php
 Doel  : "Template" voor het bevestigen van het verwijderen van Rubrieken. Bij het verwijderen moet de
         gebruiker wel aangeven wat er met gekoppelde transacties moet worden gedaan.
 Auteur: Rajenco Noort
@@ -31,7 +31,7 @@ $myrows = $wpdb->get_results("SELECT * FROM SCHIP WHERE SchipId IN ($ids)");
 	<p>Je hebt de volgende schepen gemarkeerd om te verwijderen:</p>
 	<ul> <?php
 		foreach ($myrows as $row) {
-			printf("<li>%s: %s</li>",$row->SchipId, $row->Naam);
+			printf("<li>%d: %s</li>",$row->SchipId, $row->Naam);
 		}
 	?></ul>
 
@@ -39,7 +39,7 @@ $myrows = $wpdb->get_results("SELECT * FROM SCHIP WHERE SchipId IN ($ids)");
 
 		<!-- We create a hidden field named action with the value corresponding.
 			 This value is important as we’ll be able to process the form. -->
-		<input type="hidden" name="action" value="dnh_delete_schip_details" />
+		<input type="hidden" name="action" value="dnh_delete_schip" />
 
 		<?php
 			//Hier hidden array-fields maken voor alle geselecteerde rubrieken
