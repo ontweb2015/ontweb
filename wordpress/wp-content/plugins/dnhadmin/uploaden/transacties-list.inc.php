@@ -20,7 +20,7 @@ if ('delete'===$myListTable->current_action()) {
 ?>
 <div class="wrap">
     <div id="icon-users" class="icon32"><br/></div>
-	<h2>Rubrieken
+	<h2>Transacties
 		<?php 
 		if ( current_user_can( 'manage_options' ) ) 
 			echo ' <a href="' . admin_url('admin.php?page=dnh_transacties_uploaden') . '" class="add-new-h2">Upload transacties</a>';

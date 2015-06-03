@@ -3,7 +3,7 @@
 Plugin: DNHAdmin
 Script: transacties-list-table-class.inc.php
 Doel  : Klasse die de lijst met transacties kan renderen
-Auteur: BugSlayer
+Auteur: Stef
 *******************************************************************************************************/
 
  /*************************** LOAD THE BASE CLASS *******************************
@@ -85,7 +85,11 @@ class DNHTransacties_List_Table extends WP_List_Table {
             'transactieid'     => 'TransactieId',
             'bedrag'    => 'Bedrag',
             'datum' => 'Datum',
-            'rubriek' => 'Rubriek'
+            'rubriek' => 'Rubriek',
+            'rekeningnummer' => 'Rekeningnummer',
+            'tegenpersoon' => 'Tegenpersoon',
+            'typetransactie' => 'TypeTransactie',
+            'referentienummer' => 'Referentienummer'
         );
         return $columns;
     }
@@ -153,9 +157,24 @@ class DNHTransacties_List_Table extends WP_List_Table {
     }
 	
 	    function column_rubriek($item) {
-        return $item->Naam;
+        return $item->Rubriek;
     }
     
+	    function column_rekeningnummer($item) {
+        return $item->Rekeningnummer;
+    }
+			
+	    function column_tegenpersoon($item) {
+        return $item->Tegenpersoon;
+    }
+			
+	    function column_typetransactie($item) {
+        return $item->TypeTransactie;
+    }
+			
+	    function column_referentienummer($item) {
+        return $item->Referentienummer;
+    }
    /** ************************************************************************
  	 * Functie die aangeroepen wordt als PHP niet de goede functie kan vinden
     **************************************************************************/
