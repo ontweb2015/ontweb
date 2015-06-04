@@ -7,7 +7,7 @@ Doel  : "Template" voor het bevestigen van het verwijderen van Rubrieken. Bij he
 Auteur: Rajenco Noort
 *******************************************************************************************************/
 
-// Alle gemarkeerde rubrieken in een array stoppen
+// Alle gemarkeerde schepen in een array stoppen
 $schepen = Array();
 if (isset($_GET['schip'])) {
 	$value = $_GET['schip'];
@@ -20,7 +20,7 @@ if (isset($_GET['schip'])) {
 	}
 }
 
-// Rubriek-informatie ophalen
+// Schepen-informatie ophalen
 global $wpdb;
 $ids = join(',',$schepen);  
 $myrows = $wpdb->get_results("SELECT * FROM SCHIP WHERE SchipId IN ($ids)");

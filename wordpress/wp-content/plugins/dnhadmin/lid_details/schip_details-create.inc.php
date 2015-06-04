@@ -14,7 +14,7 @@ Auteur: Rajenco
 
 		<!-- We create a hidden field named action with the value corresponding.
 			 This value is important as we’ll be able to process the form. -->
-		<input type="hidden" name="action" value="dnh_save_schip" />
+		<input type="hidden" name="action" value="dnh_save_schip_details" />
 
 		<!-- This function is extremely useful and prevents your form from being submitted by a user other than an admin. 
 	    	 It’s a security measure	-->

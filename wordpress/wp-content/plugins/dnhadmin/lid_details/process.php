@@ -63,7 +63,7 @@ function dnh_process_edit_lid_details() {
   
   if ( isset( $_POST['emailadres'] ) )
   {
-    $data['Emailadres'] = sanitize_text_field( $_POST['emailadres'] );
+	$data['Emailadres'] = sanitize_text_field( $_POST['emailadres'] );
   } else {
     $error_message .= 'Emailadres is niet ingevuld';
   }
@@ -86,6 +86,68 @@ function dnh_process_edit_lid_details() {
     $qvars = array( 'page' => 'dnh_lid_details&LidId=' . $_POST['lidid'] . "'", 
       'dnh_ntc' => 'updated',
       'dnh_ntm' => urlencode( 'Lid is succesvol bijgewerkt' ) );
+  }
+  wp_redirect( add_query_arg( $qvars, admin_url( 'admin.php' ) ) );
+  exit;
+}
+
+/**************************************************************** 
+TOEVOEGEN SCHIP
+Dit wordt aangeroepen zowel bij het aanmaken van een nieuwe rubriek
+als het bijwerken van een bestaande rubriek.
+*****************************************************************/
+// De Action Hook
+add_action( 'admin_post_dnh_save_schip_details', 'dnh_process_create_schip_details' );
+// De functie
+function dnh_process_create_schip_details() {
+  // Controleer de rechten
+  if ( !current_user_can( 'manage_options' ) )
+  {
+    wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+  }
+  // Check that nonce field
+  check_admin_referer( 'dnh_verify' );
+
+  // Ophalen en valideren van de data
+  $error_message = "";
+  $data = array();
+  if ( isset( $_POST['naam'] ) )
+  {
+  	$data['Naam'] = sanitize_text_field( $_POST['naam'] );
+  } else {
+    $error_message .= 'Naam veld is niet meegestuurd';
+  }
+  
+  if ( isset( $_POST['lengte'] ) )
+  {
+  	$data['Lengte'] = sanitize_text_field( $_POST['lengte'] );
+  } else {
+    $error_message .= 'Lengte veld is niet meegestuurd';
+  }
+  
+  if ( isset( $_POST['type'] ) )
+  {
+  	$data['type'] = $_POST['type'];
+  }
+  
+  if ( isset( $_POST['lid_lidid'] ) )
+  {
+  	$data['lid_lidid'] = $_POST['lid_lidid'];
+  }
+
+  if(strlen($error_message) > 0) {
+    // Redirect met foutbericht voorbereiden
+    $qvars = array( 'page' => 'dnh_lid_details&LidId=' . $_POST['lid_lidid'] . "'", 
+      'dnh_ntc' => 'error',
+      'dnh_ntm' => urlencode( $error_message )
+    );
+  } else {
+    global $wpdb;
+    $updates = $wpdb->insert('SCHIP', $data);
+    // Redirect voorbereiden
+     $qvars = array( 'page' => 'dnh_lid_details&LidId=' . $_POST['lid_lidid'] . "'", 
+      'dnh_ntc' => 'updated',
+      'dnh_ntm' => urlencode( 'Schip is succesvol aangemaakt' ) );
   }
   wp_redirect( add_query_arg( $qvars, admin_url( 'admin.php' ) ) );
   exit;
@@ -204,7 +266,7 @@ function dnh_process_delete_schip_details() {
 
   if(strlen($error_message) > 0) {
     // Redirect voorbereiden
-    $qvars = array( 'page' => 'dnh_schepen', 
+   $qvars = array( 'page' => 'dnh_schepen', 
       'dnh_ntc' => 'error',
       'dnh_ntm' => urlencode( $error_message )
     );
@@ -217,7 +279,7 @@ function dnh_process_delete_schip_details() {
       $wpdb->delete( 'SCHIP', Array( 'SchipId' => $schip ) );
     }
     // Redirect voorbereiden
-    $qvars = array( 'page' => 'dnh_schepen', 
+   $qvars = array( 'page' => 'dnh_schepen',
       'dnh_ntc' => 'updated',
       'dnh_ntm' => urlencode( 'Schip succesvol verwijderd' ) 
      );

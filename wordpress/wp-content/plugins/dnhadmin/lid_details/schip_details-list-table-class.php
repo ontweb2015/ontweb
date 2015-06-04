@@ -1,9 +1,9 @@
 <?php
 /*******************************************************************************************************
 Plugin: DNHAdmin
-Script: rubrieken-list-table-class.inc.php
+Script: schip_details-list-table-class.inc.php
 Doel  : Klasse die de lijst met rubrieken kan renderen
-Auteur: BugSlayer
+Auteur: Rajenco Noort
 *******************************************************************************************************/
 
  /*************************** LOAD THE BASE CLASS *******************************
