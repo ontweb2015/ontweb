@@ -33,7 +33,7 @@ function dnh_upload_transactions() {
 		
 	}
 		
-	wp_redirect(add_query_arg( array('page' => 'dnh_uploaden_1'), admin_url( 'admin.php' ) ) );
+	wp_redirect(add_query_arg( array('page' => 'dnh_transacties'), admin_url( 'admin.php' ) ) );
   	exit;
 }
 
