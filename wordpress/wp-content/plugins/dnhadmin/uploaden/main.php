@@ -29,7 +29,7 @@ function dnh_uploaden_on_admin_menu() {
 }
 
 
-function dnh_trasacties_uploaden() {
+function dnh_transacties_uploaden() {
 	include "upload_form.inc.php";
 }
 
