@@ -84,6 +84,7 @@ class DNHTransacties_List_Table extends WP_List_Table {
             'cb'        => '<input type="checkbox" />', //Render a checkbox instead of text
             'transactieid'     => 'TransactieId',
             'bedrag'    => 'Bedrag',
+            'valuta' => 'Valuta',
             'datum' => 'Datum',
             'rubriek' => 'Rubriek',
             'rekeningnummer' => 'Rekeningnummer',
@@ -151,6 +152,10 @@ class DNHTransacties_List_Table extends WP_List_Table {
 	function column_bedrag($item) {
 		return $item->Bedrag;
 	}
+	
+	    function column_valuta($item) {
+        return $item->Valuta;
+    }
 	
     function column_datum($item) {
         return $item->Datum;
