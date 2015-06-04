@@ -1,0 +1,478 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Waterside v1.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-02-03 17:18:28+0000\n"
+"Last-Translator: HermesThemes <hello@hermesthemes.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: \n"
+"X-Poedit-Country: \n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: footer.php:18
+#: hermes-admin/hermes-customizer.php:66
+#@ waterside
+msgid "All Rights Reserved"
+msgstr ""
+
+#: functions.php:180
+#, php-format
+#@ waterside
+msgid "%s"
+msgstr ""
+
+#: loop.php:11
+#, php-format
+#@ waterside
+msgid "Permalink to %s"
+msgstr ""
+
+#: single.php:48
+#@ waterside
+msgid "Tags"
+msgstr ""
+
+#: page-templates/blog.php:40
+#: page-templates/booking.php:110
+#: page-templates/gallery.php:40
+#: page.php:35
+#@ waterside
+msgid "Edit page"
+msgstr ""
+
+#: page-templates/blog.php:51
+#: page-templates/gallery.php:51
+#: page.php:46
+#: single.php:47
+#@ waterside
+msgid "Pages"
+msgstr ""
+
+#: pagination.php:13
+#@ waterside
+msgid "&larr; Previous"
+msgstr ""
+
+#: pagination.php:14
+#@ waterside
+msgid "Next &rarr;"
+msgstr ""
+
+#: archive.php:12
+#@ waterside
+msgid "Post Tagged with:"
+msgstr ""
+
+#: archive.php:13
+#: archive.php:14
+#: archive.php:15
+#@ waterside
+msgid "Archive for"
+msgstr ""
+
+#: author.php:13
+#@ waterside
+msgid "Posts by"
+msgstr ""
+
+#: search.php:12
+#@ waterside
+msgid "Search Results for"
+msgstr ""
+
+#: comments.php:2
+#@ waterside
+msgid "This post is password protected. Enter the password to view any comments."
+msgstr ""
+
+#: comments.php:14
+#@ waterside
+msgid "No Comments"
+msgstr ""
+
+#: comments.php:14
+#@ waterside
+msgid "One Comment"
+msgstr ""
+
+#: comments.php:14
+#@ waterside
+msgid "% Comments"
+msgstr ""
+
+#: comments.php:18
+#: comments.php:32
+#@ waterside
+msgid "<span class=\"meta-nav\">&larr;</span> Older Comments"
+msgstr ""
+
+#: comments.php:18
+#: comments.php:32
+#@ waterside
+msgid "Newer Comments <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: comments.php:44
+#@ waterside
+msgid "Comments are closed."
+msgstr ""
+
+#: comments.php:59
+#@ waterside
+msgid "Your Name"
+msgstr ""
+
+#: comments.php:64
+#@ waterside
+msgid "Your Email"
+msgstr ""
+
+#: comments.php:69
+#@ waterside
+msgid "Your Website"
+msgstr ""
+
+#: comments.php:76
+#@ waterside
+msgid "Comment"
+msgstr ""
+
+#: comments.php:79
+#, php-format
+#@ default
+msgid "Logged in as <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\">Log out?</a>"
+msgstr ""
+
+#: comments.php:80
+#@ waterside
+msgid "Leave a Reply"
+msgstr ""
+
+#: comments.php:81
+#@ waterside
+msgid "Cancel"
+msgstr ""
+
+#: comments.php:82
+#@ waterside
+msgid "Submit Comment"
+msgstr ""
+
+#: functions.php:181
+#, php-format
+#@ waterside
+msgid "%s at %s"
+msgstr ""
+
+#: functions.php:181
+#@ waterside
+msgid "Edit"
+msgstr ""
+
+#: functions.php:185
+#@ waterside
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: functions.php:206
+#@ waterside
+msgid "Pingback:"
+msgstr ""
+
+#: functions.php:206
+#@ waterside
+msgid "(Edit)"
+msgstr ""
+
+#: hermes-admin/post-options.php:89
+#@ waterside
+msgid "Slideshow autoplay speed in miliseconds"
+msgstr ""
+
+#: page-templates/booking.php:34
+#@ waterside
+msgid "Booking Enquiry"
+msgstr ""
+
+#: page-templates/booking.php:39
+#@ waterside
+msgid "Your name is required"
+msgstr ""
+
+#: page-templates/booking.php:42
+#@ waterside
+msgid "A valid email is required"
+msgstr ""
+
+#: page-templates/booking.php:45
+#@ waterside
+msgid "A complete arrival date is required"
+msgstr ""
+
+#: page-templates/booking.php:48
+#@ waterside
+msgid "A complete departure date is required"
+msgstr ""
+
+#: page-templates/booking.php:51
+#@ waterside
+msgid "A number of one or more adults is required"
+msgstr ""
+
+#: page-templates/booking.php:63
+#@ waterside
+msgid "Name:"
+msgstr ""
+
+#: page-templates/booking.php:64
+#@ waterside
+msgid "Email:"
+msgstr ""
+
+#: page-templates/booking.php:65
+#@ waterside
+msgid "Telephone:"
+msgstr ""
+
+#: page-templates/booking.php:66
+#@ waterside
+msgid "Date of arrival:"
+msgstr ""
+
+#: page-templates/booking.php:67
+#@ waterside
+msgid "Date of departure:"
+msgstr ""
+
+#: page-templates/booking.php:68
+#@ waterside
+msgid "Adults:"
+msgstr ""
+
+#: page-templates/booking.php:69
+#@ waterside
+msgid "Children:"
+msgstr ""
+
+#: page-templates/booking.php:70
+#@ waterside
+msgid "Comments:"
+msgstr ""
+
+#: page-templates/booking.php:126
+#@ waterside
+msgid "You booking enquiry has been sent. We will contact you as soon as possible."
+msgstr ""
+
+#: page-templates/booking.php:133
+#@ waterside
+msgid "Name"
+msgstr ""
+
+#: page-templates/booking.php:138
+#@ waterside
+msgid "Email"
+msgstr ""
+
+#: page-templates/booking.php:143
+#@ waterside
+msgid "Telephone"
+msgstr ""
+
+#: page-templates/booking.php:148
+#@ waterside
+msgid "Date of Arrival"
+msgstr ""
+
+#: page-templates/booking.php:153
+#@ waterside
+msgid "Date of Departure"
+msgstr ""
+
+#: page-templates/booking.php:158
+#@ waterside
+msgid "Adults"
+msgstr ""
+
+#: page-templates/booking.php:163
+#@ waterside
+msgid "Children"
+msgstr ""
+
+#: page-templates/booking.php:168
+#@ waterside
+msgid "Comments"
+msgstr ""
+
+#: 404.php:12
+#@ waterside
+msgid "Page not found"
+msgstr ""
+
+#: 404.php:19
+#@ waterside
+msgid "Apologies, but the requested page cannot be found. Perhaps searching will help find a related page."
+msgstr ""
+
+#: 404.php:25
+#@ waterside
+msgid "Browse Categories"
+msgstr ""
+
+#: 404.php:30
+#@ waterside
+msgid "Monthly Archives"
+msgstr ""
+
+#: footer.php:18
+#: hermes-admin/hermes-customizer.php:66
+#@ waterside
+msgid "Copyright &copy; "
+msgstr ""
+
+#: hermes-admin/hermes-customizer.php:7
+#@ waterside
+msgid "Customize"
+msgstr ""
+
+#: hermes-admin/post-options.php:106
+#@ waterside
+msgid "Send form submissions to this email"
+msgstr ""
+
+#: hermes-admin/post-options.php:108
+#@ waterside
+msgid "If left blank, submissions will be sent to"
+msgstr ""
+
+#: featured-page.php:34
+#@ waterside
+msgid "Thank you for installing Waterside Theme"
+msgstr ""
+
+#: featured-page.php:41
+#@ waterside
+msgid "Please select a static page to be displayed on the homepage."
+msgstr ""
+
+#: featured-page.php:42
+#@ waterside
+msgid "You can do so by going to"
+msgstr ""
+
+#: footer.php:17
+#@ waterside
+msgid "Theme by"
+msgstr ""
+
+#: functions.php:113
+#@ waterside
+msgid "Sidebar"
+msgstr ""
+
+#: functions.php:115
+#@ waterside
+msgid "Appears in the narrow column of the site."
+msgstr ""
+
+#: hermes-admin/post-options.php:78
+#@ waterside
+msgid "Display attached images as a slideshow"
+msgstr ""
+
+#: hermes-admin/post-options.php:80
+#@ waterside
+msgid "Yes"
+msgstr ""
+
+#: hermes-admin/post-options.php:86
+#@ waterside
+msgid "Enable slideshow autoplay"
+msgstr ""
+
+#: hermes-admin/post-options.php:91
+#@ waterside
+msgid "1 second = 1000 miliseconds"
+msgstr ""
+
+#: index.php:21
+#@ waterside
+msgid "Recent Posts"
+msgstr ""
+
+#: hermes-admin/post-options.php:81
+#@ waterside
+msgid "No"
+msgstr ""
+
+#: page-templates/booking.php:173
+#@ waterside
+msgid "Send Request"
+msgstr ""
+
+#: single.php:36
+#@ waterside
+msgid "Edit post"
+msgstr ""
+
+#: hermes-admin/hermes-customizer.php:19
+#@ waterside
+msgid "Default"
+msgstr ""
+
+#: hermes-admin/hermes-customizer.php:31
+#@ waterside
+msgid "General Settings"
+msgstr ""
+
+#: hermes-admin/hermes-customizer.php:40
+#@ waterside
+msgid "Fonts & Color Settings"
+msgstr ""
+
+#: hermes-admin/hermes-customizer.php:59
+#@ waterside
+msgid "Logo File Upload"
+msgstr ""
+
+#: hermes-admin/hermes-customizer.php:78
+#@ waterside
+msgid "Copyright text in Footer"
+msgstr ""
+
+#: hermes-admin/hermes-customizer.php:97
+#@ waterside
+msgid "Header background color"
+msgstr ""
+
+#: hermes-admin/hermes-customizer.php:116
+#@ waterside
+msgid "Choose the main body font"
+msgstr ""
+
+#: hermes-admin/hermes-customizer.php:135
+#@ waterside
+msgid "Main body text color"
+msgstr ""
+
+#: hermes-admin/hermes-customizer.php:155
+#@ waterside
+msgid "Main body anchor(link) color"
+msgstr ""
+
+#: hermes-admin/hermes-customizer.php:175
+#@ waterside
+msgid "Main body anchor(link) :hover color"
+msgstr ""
+
