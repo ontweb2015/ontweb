@@ -54,7 +54,7 @@ function dnh_process_rubriek() {
     );
   } else {
     global $wpdb; //This is used only if making any database queries
-    $updates = $wpdb->replace('RUBRIEK', $data);
+    $updates = $wpdb->replace('rubriek', $data);
     // Redirect voorbereiden
     $qvars = array( 'page' => 'dnh_rubrieken', 
       'dnh_ntc' => 'updated',
