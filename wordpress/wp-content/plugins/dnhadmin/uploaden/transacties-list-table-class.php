@@ -1,8 +1,8 @@
 <?php
 /*******************************************************************************************************
 Plugin: DNHAdmin
-Script: rubrieken-list-table-class.inc.php
-Doel  : Klasse die de lijst met rubrieken kan renderen
+Script: transacties-list-table-class.inc.php
+Doel  : Klasse die de lijst met transacties kan renderen
 Auteur: BugSlayer
 *******************************************************************************************************/
 
@@ -29,7 +29,7 @@ if(!class_exists('WP_List_Table')){
  * 
  * Our theme for this list table is going to be movies.
  */
-class DNHschip_details_List_Table extends WP_List_Table {
+class DNHTransacties_List_Table extends WP_List_Table {
     
     
     /** ************************************************************************
@@ -41,8 +41,8 @@ class DNHschip_details_List_Table extends WP_List_Table {
                 
         //Set parent defaults
         parent::__construct( array(
-            'singular'  => 'schip',     //singular name of the listed records
-            'plural'    => 'schepen',    //plural name of the listed records
+            'singular'  => 'transactie',     //singular name of the listed records
+            'plural'    => 'transacties',    //plural name of the listed records
             'ajax'      => false        //does this table support ajax?
         ) );
         
@@ -57,7 +57,7 @@ class DNHschip_details_List_Table extends WP_List_Table {
 	 *************************************************************************************/
 	function get_data() {
         global $wpdb; //This is used only if making any database queries
-        return $wpdb->get_results("SELECT * FROM schip WHERE Lid_LidId= '" . $_GET['LidId'] . "'");
+        return $wpdb->get_results("SELECT * FROM TRANSACTIE LEFT JOIN RUBRIEK ON RUBRIEK.RubriekId = TRANSACTIE.Rubriek_RubriekId");
 	}
 	
 	/********************* CONFIGUREREN VAN DE TABEL HEADER *******************************
@@ -82,12 +82,10 @@ class DNHschip_details_List_Table extends WP_List_Table {
     function get_columns(){
         $columns = array(
             'cb'        => '<input type="checkbox" />', //Render a checkbox instead of text
-            'SchipId'     => 'SchipId',
-            'Naam'    => 'Naam',
-            'Lengte' => 'Lengte',
-            'Type' => 'Type',
-            'Lid_LidId' => 'Eigenaar',
-            'Bewerken' => 'Bewerken'
+            'transactieid'     => 'TransactieId',
+            'bedrag'    => 'Bedrag',
+            'datum' => 'Datum',
+            'rubriek' => 'Rubriek'
         );
         return $columns;
     }
@@ -108,7 +106,8 @@ class DNHschip_details_List_Table extends WP_List_Table {
      **************************************************************************/
     function get_sortable_columns() {
         $sortable_columns = array(
-            'SchipId'     => array('SchipId',TRUE),     //true means it's already sorted
+            'transactieid'     => array('transactieid',true),     //true means it's already sorted
+            'naam'    => array('naam',false)
         );
         return $sortable_columns;
     }
@@ -128,34 +127,34 @@ class DNHschip_details_List_Table extends WP_List_Table {
         return sprintf(
             '<input type="checkbox" name="%1$s[]" value="%2$s" />',
             /*$1%s*/ $this->_args['singular'],  //Let's simply repurpose the table's singular label ("movie")
-            /*$2%s*/ $item->SchipId                //The value of the checkbox should be the record's id
+            /*$2%s*/ $item->TransactieId                //The value of the checkbox should be the record's id
         );
     }
 	
-	function column_schipid($item) {
-		return $item->SchipId;
+	function column_transactieid($item) {
+        //Build row actions
+        $actions = array(
+            'edit'      => sprintf( '<a href="?page=%s&%s=%s">%s</a>'  ,'dnh_transacties_edit'  ,$this->_args['singular'], $item->TransactieId, __( 'Edit' ) ),
+        );
+        
+        //Return the title contents
+        return sprintf('%1$s %2$s',
+            /*$1%s*/ $item->TransactieId,
+            /*$2%s*/ $this->row_actions($actions)
+        );
 	}
 	
-	function column_naam($item) {
-		return $item->Naam;
+	function column_bedrag($item) {
+		return $item->Bedrag;
 	}
 	
-    function column_lengte($item) {
-        return $item->Lengte;
+    function column_datum($item) {
+        return $item->Datum;
     }
-    
-	function column_type($item) {
-		return $item->Type;
-	}
 	
-	function column_lid_lidid($item) {
-		global $wpdb;
-		return $result = $wpdb->get_var("SELECT Naam FROM lid WHERE LidId= ' ". $item->Lid_LidId ." ' ");
-	}
-	
-	function column_bewerken($item) {
-		return "<a href='admin.php?page=dnh_schip_details_edit&SchipId=" . $item->SchipId . "'>" . bewerken . "</a>";
-	}
+	    function column_rubriek($item) {
+        return $item->Naam;
+    }
     
    /** ************************************************************************
  	 * Functie die aangeroepen wordt als PHP niet de goede functie kan vinden
@@ -185,8 +184,8 @@ class DNHschip_details_List_Table extends WP_List_Table {
         );
         return $actions;
     }
-
-	/** ************************************************************************
+    
+    /** ************************************************************************
      * Optional. You can handle your bulk actions anywhere or anyhow you prefer.
      * For this example package, we will handle it in the class to keep things
      * clean and organized.
@@ -197,11 +196,11 @@ class DNHschip_details_List_Table extends WP_List_Table {
         
         //Detect when a bulk action is being triggered...
         if( 'delete'===$this->current_action() ) {
-            wp_die('Schepen verwijderd (or they would be if we had items to delete)!');
+            wp_die('Items deleted (or they would be if we had items to delete)!');
         }
         
     }
-
+    
     /** ************************************************************************
      * REQUIRED! This is where you prepare your data for display. This method will
      * usually be used to query the database, sort and filter the data, and generally
@@ -222,7 +221,7 @@ class DNHschip_details_List_Table extends WP_List_Table {
         /**
          * First, lets decide how many records per page to show
          */
-        $per_page = 100;
+        $per_page = 25;
         
         
         /**

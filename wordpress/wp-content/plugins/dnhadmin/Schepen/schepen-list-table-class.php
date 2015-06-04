@@ -87,6 +87,7 @@ class DNHSchepen_List_Table extends WP_List_Table {
             'Lengte' => 'Lengte',
             'Type' => 'Type',
             'Lid_LidId' => 'Eigenaar',
+            'Bewerken' => 'Bewerken'
         );
         return $columns;
     }
@@ -107,11 +108,7 @@ class DNHSchepen_List_Table extends WP_List_Table {
      **************************************************************************/
     function get_sortable_columns() {
         $sortable_columns = array(
-            'SchipId'     => array('SchipId',TRUE),     //true means it's already sorted
-            'Naam'    => array('Naam',FALSE),
-			'Lengte'     => array('Lengte',FALSE),
-			'Type'     => array('Type',FALSE), 
-			'Lid_LidId'     => array('Lid_LidID',FALSE), 
+            'SchipId'     => array('SchipId',TRUE)
         );
         return $sortable_columns;
     }
@@ -131,23 +128,9 @@ class DNHSchepen_List_Table extends WP_List_Table {
         return sprintf(
             '<input type="checkbox" name="%1$s[]" value="%2$s" />',
             /*$1%s*/ $this->_args['singular'],  //Let's simply repurpose the table's singular label ("movie")
-            /*$2%s*/ $item->ID                //The value of the checkbox should be the record's id
+            /*$2%s*/ $item->SchipId                //The value of the checkbox should be the record's id
         );
     }
-	
-	function column_id($item) {
-        //Build row actions
-        $actions = array(
-            'edit'      => sprintf( '<a href="?page=%s&%s=%s">%s</a>'  ,'dnh_leden_edit'  ,$this->_args['singular'], $item->ID, __( 'Edit' ) ),
-            'delete'    => sprintf( '<a href="?page=%s&%s=%s">%s</a>','dnh_leden_delete',$this->_args['singular'], $item->ID, __( 'Delete' ) ),
-        );
-        
-        //Return the title contents
-        return sprintf('%1$s %2$s',
-            /*$1%s*/ $item->ID,
-            /*$2%s*/ $this->row_actions($actions)
-        );
-	}
 	
 	function column_schipid($item) {
 		return $item->SchipId;
@@ -170,6 +153,10 @@ class DNHSchepen_List_Table extends WP_List_Table {
 		return $result = $wpdb->get_var("SELECT Naam FROM LID WHERE LidId= ' ". $item->Lid_LidId ." ' ");
 	}
     
+	function column_bewerken($item) {
+		return "<a href='admin.php?page=dnh_schepen_edit&SchipId=" . $item->SchipId . "'>" . bewerken . "</a>";
+	}
+	
    /** ************************************************************************
  	 * Functie die aangeroepen wordt als PHP niet de goede functie kan vinden
     **************************************************************************/
@@ -194,7 +181,7 @@ class DNHSchepen_List_Table extends WP_List_Table {
      **************************************************************************/
     function get_bulk_actions() {
         $actions = array(
-            'delete'    => __( 'Delete' )
+            'delete'    => __( 'Delete' ),
         );
         return $actions;
     }
@@ -211,8 +198,7 @@ class DNHSchepen_List_Table extends WP_List_Table {
         //Detect when a bulk action is being triggered...
         if( 'delete'===$this->current_action() ) {
             wp_die('Items deleted (or they would be if we had items to delete)!');
-        }
-        
+        }        
     }
     
     /** ************************************************************************

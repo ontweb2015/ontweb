@@ -39,7 +39,7 @@ $myrows = $wpdb->get_results("SELECT * FROM SCHIP WHERE SchipId IN ($ids)");
 
 		<!-- We create a hidden field named action with the value corresponding.
 			 This value is important as we’ll be able to process the form. -->
-		<input type="hidden" name="action" value="dnh_delete_schip" />
+		<input type="hidden" name="action" value="dnh_delete_schip_details" />
 
 		<?php
 			//Hier hidden array-fields maken voor alle geselecteerde rubrieken

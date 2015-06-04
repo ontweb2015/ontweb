@@ -15,6 +15,7 @@ require_once( 'leden/main.php'	   	);
 require_once( 'lid_details/main.php');
 require_once( 'schepen/main.php'   	);
 require_once( 'factuur/main.php'	);
+require_once( 'uploaden/main.php'   );
 
 
 /*** Basisinstellingen van de plugin. Options zijn een soort constanten in Wordpress ***/
@@ -44,6 +45,7 @@ function dnh_on_admin_menu() {
 	dnh_schepen_on_admin_menu();
 	dnh_lid_details_on_admin_menu();
 	dnh_factuur_on_admin_menu();
+	dnh_uploaden_on_admin_menu();
 }
 
 /************** ADMIN NOTICES *****************************

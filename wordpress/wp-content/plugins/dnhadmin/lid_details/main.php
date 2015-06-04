@@ -97,11 +97,11 @@ function dnh_schip_details_edit() {
    if ( !current_user_can( 'manage_options' ) )  {
       wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
    }
-   if ( !isset( $_GET['schip'] ) )  {
+   if ( !isset( $_GET['SchipId'] ) )  {
       wp_die( __( 'You do not sent sufficient data to use this page.' ) );
    }
    
-   $id = sanitize_text_field( $_GET['schip'] );
+   $id = sanitize_text_field( $_GET['SchipId'] );
    global $wpdb;
    $item = $wpdb->get_row("SELECT * FROM SCHIP WHERE SchipId = $id");
 

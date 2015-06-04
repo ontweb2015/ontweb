@@ -11,9 +11,9 @@ BIJWERKEN VAN EEN lid
 Dit wordt aangeroepen zowel bij het bijwerken van een bestaand lid.
 *****************************************************************/
 // De Action Hook
-add_action( 'admin_post_dnh_save_lid_details', 'dnh_process_lid_details' );
+add_action( 'admin_post_dnh_save_lid_details', 'dnh_process_edit_lid_details' );
 // De functie
-function dnh_process_lid_details() {
+function dnh_process_edit_lid_details() {
   // Controleer de rechten
   if ( !current_user_can( 'manage_options' ) )
   {
@@ -25,9 +25,10 @@ function dnh_process_lid_details() {
   // Ophalen en valideren van de data
   $error_message = Array();
   $data = array();
+  $lid = array();
   if ( isset( $_POST['lidid'] ) )
   {
-    $data['LidId'] = sanitize_text_field( $_POST['lidid'] );
+    $lid['LidId'] = sanitize_text_field( $_POST['lidid'] );
   } else {
     $error_message .= 'ID is niet meegestuurd';
   }
@@ -72,25 +73,19 @@ function dnh_process_lid_details() {
   	$data['status'] = $_POST['status'];
   }
 
-  $qvars = array( 'page' => 'dnh_leden');
-  if(count($error_message) > 0) {
-    if ( isset( $data['LidId'] ) ) {
-      // Probeer weer te redirecten naar de edit-pagina
-      $qvars['page'] = 'dnh_lid_details_edit';
-      $qvars['lid'] = $data['LidId'];
-    }
-    $qvars['dnh_ntc'] = 'error';
-    $qvars['dnh_ntm'] = urlencode( join( ', ', $error_message ) );
+ if(strlen($error_message) > 0) {
+    // Redirect met foutbericht voorbereiden
+    $qvars = array( 'page' => 'dnh_lid_details&LidId=' . $_POST['lidid'] . "'", 
+      'dnh_ntc' => 'error',
+      'dnh_ntm' => urlencode( $error_message )
+    );
   } else {
-    global $wpdb; //This is used only if making any database queries
-    $updates = $wpdb->replace('LID', $data);
-    if ($updates === FALSE) {
-      $qvars['dnh_ntc'] = 'error';
-      $qvars['dnh_ntm'] = urlencode( __( 'Could not execute query: ' ) . $wpdb->last_error );
-    }
+    global $wpdb;
+    $updates = $wpdb->update('LID', $data, $lid);
     // Redirect voorbereiden
-    $qvars['dnh_ntc'] = 'updated';
-    $qvars['dnh_ntm'] = urlencode( "Lid succesvol bijgewerkt." );
+    $qvars = array( 'page' => 'dnh_lid_details&LidId=' . $_POST['lidid'] . "'", 
+      'dnh_ntc' => 'updated',
+      'dnh_ntm' => urlencode( 'Lid is succesvol bijgewerkt' ) );
   }
   wp_redirect( add_query_arg( $qvars, admin_url( 'admin.php' ) ) );
   exit;
@@ -100,9 +95,9 @@ function dnh_process_lid_details() {
 BIJWERKEN VAN EEN schip
 Dit wordt aangeroepen zowel bij het bijwerken van een bestaand schip.
 *****************************************************************/
-add_action( 'admin_post_dnh_save_schip_details', 'dnh_process_schip_details' );
+add_action( 'admin_post_dnh_save_edit_schip_details', 'dnh_process_edit_schip_details' );
 // De functie
-function dnh_process_schip_details() {
+function dnh_process_edit_schip_details() {
   // Controleer de rechten
   if ( !current_user_can( 'manage_options' ) )
   {
@@ -112,13 +107,21 @@ function dnh_process_schip_details() {
   check_admin_referer( 'dnh_verify' );
 
   // Ophalen en valideren van de data
-  $error_message = "";
+  $error_message = array();
   $data = array();
+  $schip = array();
+  if ( isset( $_POST['schipid'] ) )
+  {
+  	$schip['SchipId'] = sanitize_text_field( $_POST['schipid'] );
+  } else {
+    $error_message .= 'Schip ID is niet meegestuurd.';
+  }
+  
   if ( isset( $_POST['naam'] ) )
   {
   	$data['Naam'] = sanitize_text_field( $_POST['naam'] );
   } else {
-    $error_message .= 'Naam veld is niet meegestuurd';
+    $error_message .= 'Naam is niet meegestuurd';
   }
   
   if ( isset( $_POST['lengte'] ) )
@@ -140,17 +143,17 @@ function dnh_process_schip_details() {
 
   if(strlen($error_message) > 0) {
     // Redirect met foutbericht voorbereiden
-    $qvars = array( 'page' => 'dnh_lid_details', 
+    $qvars = array( 'page' => 'dnh_lid_details&LidId=' . $_POST['lid_lidid'] . "'", 
       'dnh_ntc' => 'error',
       'dnh_ntm' => urlencode( $error_message )
     );
   } else {
     global $wpdb;
-    $updates = $wpdb->insert('SCHIP', $data);
+    $updates = $wpdb->update('SCHIP', $data, $schip);
     // Redirect voorbereiden
-    $qvars = array( 'page' => 'dnh_lid_details', 
+    $qvars = array( 'page' => 'dnh_lid_details&LidId=' . $_POST['lid_lidid'] . "'", 
       'dnh_ntc' => 'updated',
-      'dnh_ntm' => urlencode( 'Schip is succesvol aangemaakt' ) );
+      'dnh_ntm' => urlencode( 'Schip is succesvol bijgewerkt' ) );
   }
   wp_redirect( add_query_arg( $qvars, admin_url( 'admin.php' ) ) );
   exit;
