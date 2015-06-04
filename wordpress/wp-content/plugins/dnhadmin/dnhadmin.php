@@ -25,7 +25,7 @@ add_option('current_year', 2015);
 add_action( 'admin_menu', 'dnh_on_admin_menu');
 
 /*** toevoegen mogelijkheid voor maken factuur***/
-add_action('init','createInvoice');
+//add_action('init','createInvoice');
 
 function dnh_on_admin_menu() {
 	add_menu_page( 'DNHAdmin instellingen', // Wat in de tab van je browser komt te staan

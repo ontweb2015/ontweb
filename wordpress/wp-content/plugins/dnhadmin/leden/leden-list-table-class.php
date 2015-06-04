@@ -162,7 +162,7 @@ class DNHLeden_List_Table extends WP_List_Table {
 	}
     
 	function column_factuur($item) {
-		return "<a href='	index.php?page=factuur&lidnr= 	" . $item->LidId . "'>Factuur</a>";
+		return "<a href='	admin-post.php?action=dnh_download_factuur&lidnr=" . $item->LidId . "'>Factuur</a>";
 	}
 	
    /** ************************************************************************
